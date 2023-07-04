@@ -17,6 +17,9 @@
 
     <title>Blank Page | AdminKit Demo</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
     <link href="{{ asset('adminkit/css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -43,7 +46,8 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('masjid.create') }}">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Masjid</span>
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data
+                                Masjid</span>
                         </a>
                     </li>
 
@@ -320,7 +324,7 @@
 
             <main class="content">
                 <div class="container-fluid p-0">
-
+                    @include('flash::message')
                     @yield('content')
 
                 </div>

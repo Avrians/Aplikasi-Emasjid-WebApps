@@ -54,6 +54,7 @@ class MasjidController extends Controller
         $user = auth()->user();
         $user->masjid_id = $masjid->id;
         $user->save();
+        flash('Data berhasil disimpan')->success();
         return back();
     }
 }
