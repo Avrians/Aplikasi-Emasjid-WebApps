@@ -13,12 +13,13 @@
                 </div>
                 <div class="card-body">
                     {!! Form::model($masjid, [
+                        'route' => 'masjid.store',
                         'method' => 'POST',
                     ]) !!}
 
                     <div class="form-group mb-3">
                         <label for="nama">Nama Masjid</label>
-                        {!! Form::text('nama', null, ['class' => 'form-control']) !!}
+                        {!! Form::text('nama', null, ['class' => ' form-control']) !!}
                         <span class="text-danger">{!! $errors->first('nama') !!}</span>
                     </div>
 

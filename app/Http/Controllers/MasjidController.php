@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Masjid;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreMasjidRequest;
 use App\Http\Requests\UpdateMasjidRequest;
-use App\Models\Masjid;
 
 class MasjidController extends Controller
 {
@@ -13,7 +14,12 @@ class MasjidController extends Controller
      */
     public function create()
     {
-        $masjid = new Masjid();
+        $masjid = auth()->user()->masjid;
+        if ($masjid ==  null) {
+            $masjid = new Masjid();
+        }
+        // atau bisa menggunakan seperti ini 
+        // $masjid = $masjid ?? new Masjid();
         return view('masjid_form', [
             'masjid' => $masjid,
         ]);
@@ -22,8 +28,32 @@ class MasjidController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMasjidRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'telp' => 'required',
+            'email' => 'required',
+
+        ]);
+        $masjid = auth()->user()->masjid;
+        if ($masjid ==  null) {
+            $masjid = new Masjid();
+        }
+
+        // atau bisa menggunakan seperti ini 
+        // $masjid = $masjid ?? new Masjid();
+
+        $masjid->nama = $data['nama'];
+        $masjid->alamat = $data['alamat'];
+        $masjid->telp = $data['telp'];
+        $masjid->email = $data['email'];
+        $masjid->save();
+
+        $user = auth()->user();
+        $user->masjid_id = $masjid->id;
+        $user->save();
+        return back();
     }
 }
