@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MasjidController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Middleware\EnsureDataMasjidCompleted;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,5 +34,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(EnsureDataMasjidCompleted::class)->group(function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::resource('userprofil', UserProfileController::class);
     });
 });
