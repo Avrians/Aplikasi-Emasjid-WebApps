@@ -15,7 +15,7 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
 
-    <title>Blank Page | AdminKit Demo</title>
+    <title>{{ $title ?? '' }} :: e-Masjid</title>
 
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('adminkit/css/app.css') }}" rel="stylesheet">
@@ -32,17 +32,17 @@
 
                 <ul class="sidebar-nav">
                     <li class="sidebar-header">
-                        Pages
+                        Menu Utama
                     </li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item {{ Route::is('home') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('home') }}">
                             <i class="align-middle" data-feather="sliders"></i> <span
                                 class="align-middle">Beranda</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item {{ Route::is('masjid.*') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('masjid.create') }}">
                             <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data
                                 Masjid</span>

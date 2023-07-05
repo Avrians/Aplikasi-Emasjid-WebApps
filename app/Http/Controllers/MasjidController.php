@@ -22,6 +22,7 @@ class MasjidController extends Controller
         // $masjid = $masjid ?? new Masjid();
         return view('masjid_form', [
             'masjid' => $masjid,
+            'title' => 'Form Masjid',
         ]);
     }
 
