@@ -48,6 +48,12 @@
                                 Masjid</span>
                         </a>
                     </li>
+                    <li class="sidebar-item {{ Route::is('kas.*') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kas.index') }}">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Kas
+                                Masjid</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="pages-sign-in.html">
@@ -304,8 +310,8 @@
                                     class="text-dark">{{ auth()->user()->name }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="{{ route('userprofil.edit', 0) }}"><i class="align-middle me-1"
-                                        data-feather="user"></i> Ubah Profile</a>
+                                <a class="dropdown-item" href="{{ route('userprofil.edit', 0) }}"><i
+                                        class="align-middle me-1" data-feather="user"></i> Ubah Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout-user') }}">Log out</a>
                             </div>
