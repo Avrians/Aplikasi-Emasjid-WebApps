@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('kas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('masjid_id')->index();
+            $table->dateTime('tanggal');
+            $table->string('kategori')->nullable();
+            $table->text('keterangan');
+            $table->enum('jenis', ['masuk', 'keluar']);
+            $table->bigInteger('jumlah');
+            $table->bigInteger('saldo_akhir');
+            $table->foreignId('created_by')->index();
             $table->timestamps();
         });
     }
