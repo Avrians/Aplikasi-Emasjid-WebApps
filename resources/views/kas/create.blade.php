@@ -17,6 +17,7 @@
                     <div class="form-group mb-3">
                         {!! Form::label('tanggal', 'Tanggal') !!}
                         {!! Form::date('tanggal', $kas->tanggal ?? now(), ['class' => 'form-control', 'required']) !!}
+                        <span class="text-danger"{{ $errors->first('tanggal')</span> }}></span>
                     </div>
 
                     <div class="form-group mb-3">
@@ -44,16 +45,6 @@
                     <div class="form-group mb-3">
                         {!! Form::label('jumlah', 'Jumlah') !!}
                         {!! Form::number('jumlah', null, ['class' => 'form-control', 'required']) !!}
-                    </div>
-
-                    <div class="form-group mb-3">
-                        {!! Form::label('saldo_akhir', 'Saldo Akhir') !!}
-                        {!! Form::number('saldo_akhir', null, ['class' => 'form-control', 'required']) !!}
-                    </div>
-
-                    <div class="form-group mb-3">
-                        {!! Form::label('created_by', 'Dibuat Oleh') !!}
-                        {!! Form::text('created_by', null, ['class' => 'form-control', 'required']) !!}
                     </div>
 
                     <div class="form-group mb-3">

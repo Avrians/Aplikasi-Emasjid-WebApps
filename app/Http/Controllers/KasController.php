@@ -37,6 +37,7 @@ class KasController extends Controller
 
         $validatedData['saldo_akhir'] = $saldo_akhir;
 
+        dd($validatedData);
         Kas::create($validatedData);
 
         return redirect()->route('kas.index')->with('success', 'Data kas berhasil ditambahkan.');
