@@ -9,14 +9,15 @@ class KasController extends Controller
 {
     public function index()
     {
-        $kases = Kas::all();
+        $kases = Kas::latest()->paginate(50);
 
         return view('kas.index', compact('kases'));
     }
 
     public function create()
     {
-        return view('kas.create');
+        $kas = new Kas();
+        return view('kas.create', compact('kas'));
     }
 
 

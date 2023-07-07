@@ -49,6 +49,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $kases->links() }}
                 </div>
             </div>
 
