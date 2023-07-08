@@ -46,13 +46,11 @@ class KasController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'masjid_id' => 'required',
             'tanggal' => 'required|date',
             'kategori' => 'nullable',
             'keterangan' => 'required',
             'jenis' => 'required|in:masuk,keluar',
             'jumlah' => 'required|integer',
-            'created_by' => 'required',
         ]);
 
         $saldo_akhir = $this->calculateSaldoAkhir($validatedData['jenis'], $validatedData['jumlah']);

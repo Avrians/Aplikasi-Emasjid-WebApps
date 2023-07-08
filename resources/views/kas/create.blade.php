@@ -10,26 +10,26 @@
 
                 <div class="card-body">
                     {!! Form::model($kas, [
-                        'route' => isset($kas->id) ? ['kas.update', $kas->id] : 'kas.store', 
+                        'route' => isset($kas->id) ? ['kas.update', $kas->id] : 'kas.store',
                         'method' => isset($kas->id) ? 'PUT' : 'POST',
-                        ]) !!}
+                    ]) !!}
 
                     <div class="form-group mb-3">
                         {!! Form::label('tanggal', 'Tanggal') !!}
                         {!! Form::date('tanggal', $kas->tanggal ?? now(), ['class' => 'form-control', 'required']) !!}
-                        <span class="text-danger"{{ $errors->first('tanggal')</span> }}></span>
+                        <span class="text-danger">{{ $errors->first('tanggal') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
                         {!! Form::label('kategori', 'Kategori') !!}
                         {!! Form::text('kategori', null, ['class' => 'form-control']) !!}
-                        <span class="text-danger"{{ $errors->first('kategori')</span> }}></span>
+                        <span class="text-danger">{{ $errors->first('kategori') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
                         {!! Form::label('keterangan', 'Keterangan') !!}
                         {!! Form::textarea('keterangan', null, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
-                        <span class="text-danger"{{ $errors->first('keterangan')</span> }}></span>
+                        <span class="text-danger">{{ $errors->first('keterangan') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
@@ -42,13 +42,13 @@
                             {!! Form::radio('jenis', 'keluar', null, ['class' => 'form-check-input', 'required']) !!}
                             {!! Form::label('jenis', 'Keluar', ['class' => 'form-check-label']) !!}
                         </div>
-                        <span class="text-danger"{{ $errors->first('jenis')</span> }}></span>
+                        <span class="text-danger">{{ $errors->first('jenis') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
                         {!! Form::label('jumlah', 'Jumlah') !!}
                         {!! Form::number('jumlah', null, ['class' => 'form-control', 'required']) !!}
-                        <span class="text-danger"{{ $errors->first('jumlah')</span> }}></span>
+                        <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
