@@ -24,22 +24,44 @@ class KasController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'masjid_id' => 'required',
             'tanggal' => 'required|date',
             'kategori' => 'nullable',
             'keterangan' => 'required',
             'jenis' => 'required|in:masuk,keluar',
             'jumlah' => 'required|integer',
-            'created_by' => 'required',
         ]);
 
-        $saldo_akhir = $this->calculateSaldoAkhir($validatedData['jenis'], $validatedData['jumlah']);
+        $kas2 = Kas::where('masjid_id', auth()->user()->masjid_id)
+            ->orderBy('tanggal', 'desc')->first();
+        $saldoAkhir = 0;
+        if ($kas2 != null) {
+            // saldo akhir ditambah dengan jumlah transaksi masuk/ keluar
+            if ($validatedData['jenis'] == 'masuk') {
+                $saldoAkhir = $kas2->saldo_akhir + $validatedData['jumlah'];
+            } else {
+                $saldoAkhir = $kas2->saldo_akhir - $validatedData['jumlah'];
+            };
+        } else {
+            // saldo pertama 
+            $saldoAkhir = $validatedData['jumlah'];
+        }
+        if ($saldoAkhir < 0) {
+            flash('Data kas gagal di tambhakan, saldo akhir di kurang transaksi tidak boleh dari 0')->error();
+            return back();
+        }
 
-        $validatedData['saldo_akhir'] = $saldo_akhir;
 
-        dd($validatedData);
-        Kas::create($validatedData);
+        //  $saldoAkhir = $this->calculateSaldoAkhir($validatedData['jenis'], $validatedData['jumlah']);
 
+        $kas = new Kas();
+        $kas->fill($validatedData);
+        $kas['saldo_akhir'] = $saldoAkhir;
+        $kas->masjid_id = auth()->user()->masjid_id;
+        $kas->created_by = auth()->user()->id;
+        $kas->save();
+        // Kas::create($kas);
+
+        flash('Data kas berhasil ditambahkan.')->success();
         return redirect()->route('kas.index')->with('success', 'Data kas berhasil ditambahkan.');
     }
 

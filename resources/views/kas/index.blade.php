@@ -15,12 +15,14 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
+                                <th>Masdjid</th>
                                 <th>Tanggal</th>
                                 <th>Kategori</th>
                                 <th>Keterangan</th>
                                 <th>Jenis</th>
                                 <th>Jumlah</th>
                                 <th>Saldo Akhir</th>
+                                <th>Create By</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -28,12 +30,14 @@
                             @foreach ($kases as $key => $kas)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
+                                    <td>{{ $kas->masjid_id }}</td>
                                     <td>{{ $kas->tanggal }}</td>
                                     <td>{{ $kas->kategori }}</td>
                                     <td>{{ $kas->keterangan }}</td>
                                     <td>{{ $kas->jenis }}</td>
                                     <td>{{ $kas->jumlah }}</td>
                                     <td>{{ $kas->saldo_akhir }}</td>
+                                    <td>{{ $kas->created_by }}</td>
                                     <td>
                                         <a href="{{ route('kas.show', $kas->id) }}" class="btn btn-info btn-sm">Detail</a>
                                         <a href="{{ route('kas.edit', $kas->id) }}" class="btn btn-primary btn-sm">Edit</a>
