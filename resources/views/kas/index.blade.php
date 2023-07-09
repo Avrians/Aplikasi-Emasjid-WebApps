@@ -35,8 +35,8 @@
                                     <td>{{ $kas->kategori }}</td>
                                     <td>{{ $kas->keterangan }}</td>
                                     <td>{{ $kas->jenis }}</td>
-                                    <td>{{ $kas->jumlah }}</td>
-                                    <td>{{ $kas->saldo_akhir }}</td>
+                                    <td>{{ formatRupiah($kas->jumlah) }}</td>
+                                    <td>{{ formatRupiah($kas->saldo_akhir) }}</td>
                                     <td>{{ $kas->created_by }}</td>
                                     <td>
                                         <a href="{{ route('kas.show', $kas->id) }}" class="btn btn-info btn-sm">Detail</a>
