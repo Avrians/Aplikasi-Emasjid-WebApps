@@ -18,4 +18,17 @@ class Kas extends Model
         'jumlah',
         'created_by',
     ];
+
+    protected $casts = [
+        'tanggal' => 'datetime:d-m-Y H:i'
+    ];
+
+    public function masjid()
+    {
+        return $this->belongsTo(Masjid::class);
+    }
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

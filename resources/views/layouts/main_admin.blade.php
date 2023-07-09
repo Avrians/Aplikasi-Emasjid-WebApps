@@ -149,6 +149,11 @@
                 </a>
 
                 <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <h4 class="ml-2 fw-bold pt-2">{{ auth()->user()->masjid->nama }}</h4>
+                        </li>
+                    </ul>
                     <ul class="navbar-nav navbar-align">
                         <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown"

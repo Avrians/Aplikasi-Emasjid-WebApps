@@ -15,14 +15,13 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Masdjid</th>
                                 <th>Tanggal</th>
                                 <th>Kategori</th>
                                 <th>Keterangan</th>
                                 <th>Jenis</th>
                                 <th>Jumlah</th>
                                 <th>Saldo Akhir</th>
-                                <th>Create By</th>
+                                <th>Diinput Oleh</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -30,14 +29,13 @@
                             @foreach ($kases as $key => $kas)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $kas->masjid_id }}</td>
-                                    <td>{{ $kas->tanggal }}</td>
-                                    <td>{{ $kas->kategori }}</td>
+                                    <td>{{ $kas->tanggal->translatedFormat('d-m-Y') }}</td>
+                                    <td>{{ $kas->kategori ?? 'umum'}}</td>
                                     <td>{{ $kas->keterangan }}</td>
                                     <td>{{ $kas->jenis }}</td>
-                                    <td>{{ formatRupiah($kas->jumlah) }}</td>
-                                    <td>{{ formatRupiah($kas->saldo_akhir) }}</td>
-                                    <td>{{ $kas->created_by }}</td>
+                                    <td>{{ formatRupiah($kas->jumlah, true) }}</td>
+                                    <td>{{ formatRupiah($kas->saldo_akhir, true ) }}</td>
+                                    <td>{{ $kas->createdBy->name }}</td>
                                     <td>
                                         <a href="{{ route('kas.show', $kas->id) }}" class="btn btn-info btn-sm">Detail</a>
                                         <a href="{{ route('kas.edit', $kas->id) }}" class="btn btn-primary btn-sm">Edit</a>
