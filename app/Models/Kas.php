@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Null_;
 
 class Kas extends Model
 {
@@ -32,9 +33,10 @@ class Kas extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function scopeSaldoAkhir($query)
+    public function scopeSaldoAkhir($query, $masjidId = null)
     {
-        return   $query->where('masjid_id', auth()->user()->masjid_id)
+        $masjidId = $masjidId ?? auth()->user()->masjid_id;
+        return   $query->where('masjid_id', $masjidId)
         ->orderBy('created_at', 'desc')->value('saldo_akhir');
     }
 }

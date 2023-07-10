@@ -32,22 +32,14 @@ class KasController extends Controller
         ]);
 
         $saldoAkhir = Kas::SaldoAkhir();
-        dd($saldoAkhir);
 
-        $kas2 = Kas::where('masjid_id', auth()->user()->masjid_id)
-            ->orderBy('created_at', 'desc')->first();
-        $saldoAkhir = 0;
-        if ($kas2 != null) {
-            // saldo akhir ditambah dengan jumlah transaksi masuk/ keluar
-            if ($validatedData['jenis'] == 'masuk') {
-                $saldoAkhir = $kas2->saldo_akhir + $validatedData['jumlah'];
-            } else {
-                $saldoAkhir = $kas2->saldo_akhir - $validatedData['jumlah'];
-            };
+        // saldo akhir ditambah dengan jumlah transaksi masuk/ keluar
+        if ($validatedData['jenis'] == 'masuk') {
+            $saldoAkhir += $validatedData['jumlah'];
         } else {
-            // saldo pertama 
-            $saldoAkhir = $validatedData['jumlah'];
-        }
+            $saldoAkhir -= $validatedData['jumlah'];
+        };
+
         if ($saldoAkhir < 0) {
             flash('Data kas gagal di tambhakan, saldo akhir di kurang transaksi tidak boleh dari 0')->error();
             return back();
