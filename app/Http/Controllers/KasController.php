@@ -31,8 +31,11 @@ class KasController extends Controller
             'jumlah' => 'required|integer',
         ]);
 
+        $saldoAkhir = Kas::SaldoAkhir();
+        dd($saldoAkhir);
+
         $kas2 = Kas::where('masjid_id', auth()->user()->masjid_id)
-            ->orderBy('tanggal', 'desc')->first();
+            ->orderBy('created_at', 'desc')->first();
         $saldoAkhir = 0;
         if ($kas2 != null) {
             // saldo akhir ditambah dengan jumlah transaksi masuk/ keluar

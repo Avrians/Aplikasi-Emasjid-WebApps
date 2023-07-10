@@ -31,4 +31,10 @@ class Kas extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function scopeSaldoAkhir($query)
+    {
+        return   $query->where('masjid_id', auth()->user()->masjid_id)
+        ->orderBy('created_at', 'desc')->value('saldo_akhir');
+    }
 }
