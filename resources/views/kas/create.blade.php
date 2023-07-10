@@ -1,7 +1,7 @@
 @extends('layouts.main_admin')
 
 @section('content')
-    <h1 class="h3 mb-3">{{ isset($kas) ? 'Formulir Edit Kas' : 'Formulir Tambah Kas' }}</h1>
+    <h1 class="h3 mb-3">{{ isset($kas) ? 'Form Transaksi Edit Kas' : 'Formulir Tambah Kas' }}</h1>
 
     <div class="row">
         <div class="col-md-8">
@@ -9,6 +9,7 @@
                 {{-- <h3 class="card-header">{{ isset($kases) ? 'Edit Kas' : 'Tambah Kas' }}</h3> --}}
 
                 <div class="card-body">
+                    <h4>Saldo Akhir Saat Ini : {{ formatRupiah($saldoAkhir) }}</h4>
                     {!! Form::model($kas, [
                         'route' => isset($kas->id) ? ['kas.update', $kas->id] : 'kas.store',
                         'method' => isset($kas->id) ? 'PUT' : 'POST',
@@ -34,19 +35,19 @@
 
                     <div class="form-group mb-3">
                         <label for="jenis">Jenis Transaksi</label><br>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline mt-2">
                             {!! Form::radio('jenis', 'masuk', 1, ['class' => 'form-check-input', 'required']) !!}
-                            {!! Form::label('jenis', 'Masuk', ['class' => 'form-check-label']) !!}
+                            {!! Form::label('jenis', 'Pemasukan', ['class' => 'form-check-label']) !!}
                         </div>
                         <div class="form-check form-check-inline">
                             {!! Form::radio('jenis', 'keluar', null, ['class' => 'form-check-input', 'required']) !!}
-                            {!! Form::label('jenis', 'Keluar', ['class' => 'form-check-label']) !!}
+                            {!! Form::label('jenis', 'Pengeluaran', ['class' => 'form-check-label']) !!}
                         </div>
                         <span class="text-danger">{{ $errors->first('jenis') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
-                        {!! Form::label('jumlah', 'Jumlah') !!}
+                        {!! Form::label('jumlah', 'Jumlah Transaksi') !!}
                         {!! Form::number('jumlah', null, ['class' => 'form-control', 'required']) !!}
                         <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                     </div>
@@ -59,6 +60,6 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
 @endsection

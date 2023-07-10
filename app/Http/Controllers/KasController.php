@@ -17,7 +17,8 @@ class KasController extends Controller
     public function create()
     {
         $kas = new Kas();
-        return view('kas.create', compact('kas'));
+        $saldoAkhir = Kas::SaldoAkhir();
+        return view('kas.create', compact('kas', 'saldoAkhir'));
     }
 
 
