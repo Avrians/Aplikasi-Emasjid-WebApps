@@ -29,9 +29,9 @@ class KasController extends Controller
             'kategori' => 'nullable',
             'keterangan' => 'required',
             'jenis' => 'required|in:masuk,keluar',
-            'jumlah' => 'required|integer',
+            'jumlah' => 'required',
         ]);
-
+        $validatedData['jumlah'] = str_replace('.', '', $validatedData['jumlah']);
         $saldoAkhir = Kas::SaldoAkhir();
 
         // saldo akhir ditambah dengan jumlah transaksi masuk/ keluar
@@ -68,7 +68,7 @@ class KasController extends Controller
             'kategori' => 'nullable',
             'keterangan' => 'required',
             'jenis' => 'required|in:masuk,keluar',
-            'jumlah' => 'required|integer',
+            'jumlah' => 'required',
         ]);
 
         $saldo_akhir = $this->calculateSaldoAkhir($validatedData['jenis'], $validatedData['jumlah']);

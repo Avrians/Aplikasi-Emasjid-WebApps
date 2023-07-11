@@ -9,7 +9,7 @@
                 {{-- <h3 class="card-header">{{ isset($kases) ? 'Edit Kas' : 'Tambah Kas' }}</h3> --}}
 
                 <div class="card-body">
-                    <h4>Saldo Akhir Saat Ini : {{ formatRupiah($saldoAkhir) }}</h4>
+                    <h4>Saldo Akhir Saat Ini : Rp. {{ formatRupiah($saldoAkhir) }}</h4>
                     {!! Form::model($kas, [
                         'route' => isset($kas->id) ? ['kas.update', $kas->id] : 'kas.store',
                         'method' => isset($kas->id) ? 'PUT' : 'POST',
@@ -48,7 +48,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::label('jumlah', 'Jumlah Transaksi') !!}
-                        {!! Form::number('jumlah', null, ['class' => 'form-control', 'required']) !!}
+                        {!! Form::text('jumlah', null, ['class' => 'form-control rupiah', 'required']) !!}
                         <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                     </div>
 
