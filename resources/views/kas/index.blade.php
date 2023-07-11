@@ -18,8 +18,8 @@
                                 <th>Tanggal</th>
                                 <th>Kategori</th>
                                 <th>Keterangan</th>
-                                <th>Jenis</th>
-                                <th>Jumlah</th>
+                                <th>Pemasukan</th>
+                                <th>Pengeluaran</th>
                                 <th>Saldo Akhir</th>
                                 <th>Diinput Oleh</th>
                                 <th>Aksi</th>
@@ -30,11 +30,15 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $kas->tanggal->translatedFormat('d-m-Y') }}</td>
-                                    <td>{{ $kas->kategori ?? 'umum'}}</td>
+                                    <td>{{ $kas->kategori ?? 'umum' }}</td>
                                     <td>{{ $kas->keterangan }}</td>
-                                    <td>{{ $kas->jenis }}</td>
-                                    <td>{{ formatRupiah($kas->jumlah, true) }}</td>
-                                    <td>{{ formatRupiah($kas->saldo_akhir, true ) }}</td>
+                                    <td>
+                                        {{ $kas->jenis == 'masuk' ? formatRupiah($kas->jumlah, true) : '-' }}
+                                    </td>
+                                    <td>
+                                        {{ $kas->jenis == 'keluar' ? formatRupiah($kas->jumlah, true) : '-' }}
+                                    </td>
+                                     <td>{{ formatRupiah($kas->saldo_akhir, true) }}</td>
                                     <td>{{ $kas->createdBy->name }}</td>
                                     <td>
                                         <a href="{{ route('kas.show', $kas->id) }}" class="btn btn-info btn-sm">Detail</a>
