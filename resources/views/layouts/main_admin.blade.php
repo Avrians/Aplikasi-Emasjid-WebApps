@@ -151,7 +151,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <h4 class="ml-2 fw-bold pt-2">{{ auth()->user()->masjid->nama }}</h4>
+                            <h4 class="ml-2 fw-bold pt-2">{{ auth()->user()->masjid?->nama }}</h4>
                         </li>
                     </ul>
                     <ul class="navbar-nav navbar-align">
@@ -380,7 +380,7 @@
     <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('.rupiah').mask("#.##0", {
+            $('.rupiah ').mask("#.##0", {
                 reverse: true
             });
         });
