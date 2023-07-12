@@ -17,7 +17,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::label('tanggal', 'Tanggal') !!}
-                        {!! Form::date('tanggal', $kas->tanggal ?? now(), ['class' => 'form-control', 'required']) !!}
+                        {!! Form::date('tanggal', $kas->tanggal ?? now(), ['class' => 'form-control', 'required'] + $disable) !!}
                         <span class="text-danger">{{ $errors->first('tanggal') }}</span>
                     </div>
 
@@ -36,11 +36,11 @@
                     <div class="form-group mb-3">
                         <label for="jenis">Jenis Transaksi</label><br>
                         <div class="form-check form-check-inline mt-2">
-                            {!! Form::radio('jenis', 'masuk', 1, ['class' => 'form-check-input', 'required']) !!}
+                            {!! Form::radio('jenis', 'masuk', 1, ['class' => 'form-check-input', 'required'] + $disable) !!}
                             {!! Form::label('jenis', 'Pemasukan', ['class' => 'form-check-label']) !!}
                         </div>
                         <div class="form-check form-check-inline">
-                            {!! Form::radio('jenis', 'keluar', null, ['class' => 'form-check-input', 'required']) !!}
+                            {!! Form::radio('jenis', 'keluar', null, ['class' => 'form-check-input', 'required'] + $disable) !!}
                             {!! Form::label('jenis', 'Pengeluaran', ['class' => 'form-check-label']) !!}
                         </div>
                         <span class="text-danger">{{ $errors->first('jenis') }}</span>
@@ -48,7 +48,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::label('jumlah', 'Jumlah Transaksi') !!}
-                        {!! Form::text('jumlah', null, ['class' => 'form-control rupiah', 'required']) !!}
+                        {!! Form::text('jumlah', null, ['class' => 'form-control rupiah', 'required'] + $disable) !!}
                         <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                     </div>
 
@@ -60,6 +60,6 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 @endsection
