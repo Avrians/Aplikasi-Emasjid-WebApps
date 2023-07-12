@@ -101,5 +101,11 @@ class KasController extends Controller
         return $saldo_akhir;
     }
 
-    // ...
+    public function destroy($id)
+    {
+        $kas =  Kas::findOrFail($id);
+        $kas->delete();
+
+        return redirect()->route('kas.index');
+    }
 }

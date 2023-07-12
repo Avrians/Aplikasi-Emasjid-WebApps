@@ -43,13 +43,16 @@
                                     <td>
                                         <a href="{{ route('kas.show', $kas->id) }}" class="btn btn-info btn-sm">Detail</a>
                                         <a href="{{ route('kas.edit', $kas->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                        <form action="{{ route('kas.destroy', $kas->id) }}" method="POST"
-                                            class="d-inline">
+                                        {!! Form::open([
+                                            'method' => 'DELETE',
+                                            'route' => ['kas.destroy', $kas->id],
+                                            'style' => 'display:inline'
+                                        ]) !!}    
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                        </form>
+                                        {!! Form::close() !!}
                                     </td>
                                 </tr>
                             @endforeach
