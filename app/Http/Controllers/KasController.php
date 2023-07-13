@@ -46,17 +46,12 @@ class KasController extends Controller
             flash('Data kas gagal di tambhakan, saldo akhir di kurang transaksi tidak boleh dari 0')->error();
             return back();
         }
-
-
-        //  $saldoAkhir = $this->calculateSaldoAkhir($validatedData['jenis'], $validatedData['jumlah']);
-
         $kas = new Kas();
         $kas->fill($validatedData);
-        $kas['saldo_akhir'] = $saldoAkhir;
+        // $kas['saldo_akhir'] = $saldoAkhir;
         $kas->masjid_id = auth()->user()->masjid_id;
         $kas->created_by = auth()->user()->id;
         $kas->save();
-        // Kas::create($kas);
 
         flash('Data kas berhasil ditambahkan.')->success();
         return redirect()->route('kas.index')->with('success', 'Data kas berhasil ditambahkan.');
@@ -85,21 +80,6 @@ class KasController extends Controller
         return redirect()->route('kas.index');
     }
 
-    private function calculateSaldoAkhir($jenis, $jumlah)
-    {
-        // Ambil saldo terakhir
-        $lastKas = Kas::orderBy('id', 'desc')->first();
-        $saldo_akhir = $lastKas ? $lastKas->saldo_akhir : 0;
-
-        // Hitung saldo akhir berdasarkan jenis transaksi
-        if ($jenis == 'masuk') {
-            $saldo_akhir += $jumlah;
-        } elseif ($jenis == 'keluar') {
-            $saldo_akhir -= $jumlah;
-        }
-
-        return $saldo_akhir;
-    }
 
     public function destroy($id)
     {
@@ -115,7 +95,7 @@ class KasController extends Controller
         if ($kas->jenis == 'keluar') {
             $saldoAkhir += $kas->jumlah;
         }
-        $kasBaru->saldo_akhir = $saldoAkhir;
+        // $kasBaru->saldo_akhir = $saldoAkhir;
         $kasBaru->save();
         flash('Data sudah disimpan');
         return redirect()->route('kas.index');
