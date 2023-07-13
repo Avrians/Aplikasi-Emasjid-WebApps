@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Masjid extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nama',
+        'alamat',
+        'telp',
+        'email',
+        'saldo_akhir',
+    ];
 }

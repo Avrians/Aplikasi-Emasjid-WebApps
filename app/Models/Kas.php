@@ -38,7 +38,10 @@ class Kas extends Model
         // $masjidId = $masjidId ?? auth()->user()->masjid_id;
         // return   $query->where('masjid_id', $masjidId)
         //     ->orderBy('created_at', 'desc')->value('saldo_akhir') ?? 0;
-        return $query->masjid->saldo_akhir;
+
+        $masjidId = $masjidId ?? auth()->user()->masjid_id;
+        $masjid = Masjid::where('id', $masjidId)->first();
+        return $masjid->saldo_akhir ?? 0;
     }
     public function scopeUserMasjid($q)
     {

@@ -7,12 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations. 
+     * Run the migrations.
      */
     public function up(): void
     {
-        Schema::table('masjids', function (Blueprint $table) {
+        Schema::create('kas_masjids', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('masjid_id')->index();
+            $table->date('tanggal');
             $table->bigInteger('saldo_akhir')->default(0);
+            $table->string('created_by')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('masjids', function (Blueprint $table) {
-            $table->dropColumn('saldo_akhir');
-        });
+        Schema::dropIfExists('kas_masjids');
     }
 };

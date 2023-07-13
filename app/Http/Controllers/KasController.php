@@ -48,10 +48,10 @@ class KasController extends Controller
         }
         $kas = new Kas();
         $kas->fill($validatedData);
-        // $kas['saldo_akhir'] = $saldoAkhir;
         $kas->masjid_id = auth()->user()->masjid_id;
         $kas->created_by = auth()->user()->id;
         $kas->save();
+        auth()->user()->masjid->update(['saldo_akhir' => $saldoAkhir]);
 
         flash('Data kas berhasil ditambahkan.')->success();
         return redirect()->route('kas.index')->with('success', 'Data kas berhasil ditambahkan.');
@@ -88,7 +88,7 @@ class KasController extends Controller
         $kas->save();
         $saldoAkhir = Kas::SaldoAkhir();
         $kasBaru = $kas->replicate();
-        $kasBaru->keterangan = 'Perbaikan data id ke'.$kas->id;
+        $kasBaru->keterangan = 'Perbaikan data id ke' . $kas->id;
         if ($kas->jenis == 'masuk') {
             $saldoAkhir -= $kas->jumlah;
         }
