@@ -104,8 +104,20 @@ class KasController extends Controller
     public function destroy($id)
     {
         $kas =  Kas::findOrFail($id);
-        $kas->delete();
-
+        $kas->keterangan =  'Dihapus oleh' . auth()->user()->name;
+        $kas->save();
+        $saldoAkhir = Kas::SaldoAkhir();
+        $kasBaru = new Kas();
+        $kasBaru->tanggal = $kas->tanggal;
+        $kasBaru->kategori = $kas->kategori;
+        $kasBaru->keterangan = 'Perbaikan Data';
+        $kasBaru->jenis = $kas->jenis;
+        $kasBaru->jumlah = $kas->jumlah;
+        $kasBaru->masjid_id = $kas->masjid_id;
+        $kasBaru->created_by = $kas->created_by;
+        $kasBaru->saldo_akhir = $saldoAkhir - $kas->jumlah;
+        $kasBaru->save();
+        flash('Data sudah disimpan');
         return redirect()->route('kas.index');
     }
 }
