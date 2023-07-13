@@ -20,7 +20,6 @@
                                 <th>Keterangan</th>
                                 <th>Pemasukan</th>
                                 <th>Pengeluaran</th>
-                                <th>Saldo Akhir</th>
                                 <th>Diinput Oleh</th>
                                 <th>Aksi</th>
                             </tr>
@@ -38,7 +37,6 @@
                                     <td>
                                         {{ $kas->jenis == 'keluar' ? formatRupiah($kas->jumlah, true) : '-' }}
                                     </td>
-                                     <td>{{ formatRupiah($kas->saldo_akhir, true) }}</td>
                                     <td>{{ $kas->createdBy->name }}</td>
                                     <td>
                                         <a href="{{ route('kas.show', $kas->id) }}" class="btn btn-info btn-sm">Detail</a>
@@ -58,6 +56,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <h4>Saldo Akhir Rp. {{ formatRupiah($saldoAkhir) }}</h4>
                     {{ $kases->links() }}
                 </div>
             </div>
