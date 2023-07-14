@@ -79,11 +79,23 @@ class KasController extends Controller
         $validatedData = $request->validate([
             'kategori' => 'nullable',
             'keterangan' => 'required',
+            'jumlah' => 'required',
         ]);
-
+        $jumlah = str_replace('.', '', $validatedData['jumlah']);
+        $saldoAkhir = Kas::SaldoAkhir();
         $kas =  Kas::findOrFail($id);
+        if ($kas->jenis == 'masuk') {
+            $saldoAkhir -= $kas->jumlah;
+        }
+        if ($kas->jenis == 'keluar') {
+            $saldoAkhir += $kas->jumlah;
+        }
+        $saldoAkhir = $saldoAkhir + $jumlah;
+        $validatedData['jumlah'] = $jumlah;
         $kas->fill($validatedData);
         $kas->save();
+        auth()->user()->masjid->update(['saldo_akhir' => $saldoAkhir]);
+
 
         flash('Data kas berhasil diperbaharui.')->success();
         return redirect()->route('kas.index');

@@ -48,7 +48,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::label('jumlah', 'Jumlah Transaksi') !!}
-                        {!! Form::text('jumlah', null, ['class' => 'form-control rupiah', 'required'] + $disable) !!}
+                        {!! Form::text('jumlah', null, ['class' => 'form-control rupiah', 'required']) !!}
                         <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                     </div>
 
