@@ -54,6 +54,12 @@
                                 Masjid</span>
                         </a>
                     </li>
+                    <li class="sidebar-item {{ Route::is('profil.*') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('profil.index') }}">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profil
+                                Masjid</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="pages-sign-in.html">
@@ -106,7 +112,8 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="icons-feather.html">
-                            <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
+                            <i class="align-middle" data-feather="coffee"></i> <span
+                                class="align-middle">Icons</span>
                         </a>
                     </li>
 
