@@ -36,7 +36,7 @@ class KasController extends Controller
         $tanggalTransaksi = Carbon::parse($validatedData['tanggal']);
         $tahunBulanTransaksi = $tanggalTransaksi->format('Ym');
         $tahunBulanSekarang = Carbon::now()->format('Ym');
-        if($tahunBulanTransaksi != $tahunBulanSekarang) {
+        if ($tahunBulanTransaksi != $tahunBulanSekarang) {
             flash('Data kas gagal ditambahkan. Transaksi hanya bisa dilakukan untuk bulan ini')->error();
             return back();
         }

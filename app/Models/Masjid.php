@@ -13,6 +13,6 @@ class Masjid extends Model
         'alamat',
         'telp',
         'email',
-        'saldo_a khir',
+        'saldo_akhir',
     ];
 }
