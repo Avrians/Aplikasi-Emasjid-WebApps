@@ -4,7 +4,7 @@
     <h1 class="h3 mb-3">PROFIL MASJID {{ strtoupper(auth()->user()->masjid->nama) }}</h1>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 {{-- <h3 class="card-header">{{ isset($kases) ? 'Edit Kas' : 'Tambah Kas' }}</h3> --}}
 
@@ -30,7 +30,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::label('konten', 'Konten / Isi Profil') !!}
-                        {!! Form::textarea('konten', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'Isi Profil','required']) !!}
+                        {!! Form::textarea('konten', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'Isi Profil','id' => 'summernote','required']) !!}
                         <span class="text-danger">{{ $errors->first('keterangan') }}</span>
                     </div>
 
