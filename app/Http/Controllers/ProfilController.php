@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProfilRequest;
 use App\Http\Requests\UpdateProfilRequest;
 use App\Models\Profil;
+use Illuminate\Http\Request;
+use Str;
 
 class ProfilController extends Controller
 {
@@ -36,9 +38,17 @@ class ProfilController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProfilRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'kategori' => 'required',
+            'judul' => 'required',
+            'konten' => 'required',
+        ]);
+        $validateData['created_by'] =  auth()->user()->id;
+        $validateData['masjid_id'] =  auth()->user()->masjid_id;
+        $validateData['slug'] =  Str::slug($request->judul);
+        Profil::create($validateData);
     }
 
     /**
