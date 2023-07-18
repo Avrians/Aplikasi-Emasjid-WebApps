@@ -27,7 +27,7 @@
                         <tbody>
                             @foreach ($profil as $key => $kas)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    {{-- <td>{{ $key + 1 }}</td>
                                     <td>{{ $kas->tanggal->translatedFormat('d-m-Y') }}</td>
                                     <td>{{ $kas->kategori ?? 'umum' }}</td>
                                     <td>{{ $kas->keterangan }}</td>
@@ -51,7 +51,7 @@
                                             <button type="submit" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                         {!! Form::close() !!}
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

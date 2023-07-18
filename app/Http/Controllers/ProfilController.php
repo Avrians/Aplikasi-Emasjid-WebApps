@@ -55,25 +55,30 @@ class ProfilController extends Controller
 
         // Mendapatkan semua gambar yang cocok
         $gambarBase64 = $matches[1];
+        $masjidId = auth()->user()->masjid_id;
 
         foreach ($gambarBase64 as $gambar) {
             $data = explode(',', $gambar);
             $gambarData = $data[1]; // mendapatkan data gambar base64
 
+            // mendapatkan ekstensi file 
+            $finfo = finfo_open();
+            $ext = finfo_buffer($finfo, base64_decode($gambarData), FILEINFO_MIME_TYPE);
+            finfo_close($finfo);
+            $ext = explode('/', $ext)[1];
+
             // membuat nama file unik untuk gambar
-            $namaFile = uniqid() . '.jpg'; // Ubah ekstensi file sesuai format gambar
+            $namaFile = "profil/$masjidId/" . uniqid() . '.' . $ext; // Ubah ekstensi file sesuai format gambar
 
             // Mengubah data gambar base64 menjadi file dan menyimpannya menggunakan storage
             Storage::disk('public')->put($namaFile, base64_decode($gambarData));
 
             // Medapatkan URL gambar 
-            $urlGambar = Storage::disk('public')->url($namaFile);
+            $namaFile = "/storage/$namaFile";
 
             // Mengganti data gambar base64 degan url gambar
-            $konten = str_replace($gambar, $urlGambar, $konten);
+            $konten = str_replace($gambar, $namaFile, $konten);
         }
-        dd($konten);
-
         // Mengganti nilai konten dengan konten yang telah diubah
         $validateData['konten'] = $konten;
 
@@ -81,6 +86,8 @@ class ProfilController extends Controller
         $validateData['masjid_id'] =  auth()->user()->masjid_id;
         $validateData['slug'] =  Str::slug($request->judul);
         Profil::create($validateData);
+        flash('Data sudah disimpan');
+        return back();
     }
 
     /**
