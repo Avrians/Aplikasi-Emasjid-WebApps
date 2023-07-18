@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProfilRequest;
 use App\Http\Requests\UpdateProfilRequest;
 use App\Models\Profil;
 use Illuminate\Http\Request;
+use Storage;
 use Str;
 
 class ProfilController extends Controller
@@ -45,6 +46,37 @@ class ProfilController extends Controller
             'judul' => 'required',
             'konten' => 'required',
         ]);
+
+        $konten = $validateData['konten']; // mendapatkan nilai konten dari permintaan
+
+        // Mencocokan semua gambar yang terdapat dalam konten menggunakan regular
+        $pattern = '/<img.*?src="(data:image\/.*?;base64,.*?)".*?>/i';
+        preg_match_all($pattern, $konten, $matches);
+
+        // Mendapatkan semua gambar yang cocok
+        $gambarBase64 = $matches[1];
+
+        foreach ($gambarBase64 as $gambar) {
+            $data = explode(',', $gambar);
+            $gambarData = $data[1]; // mendapatkan data gambar base64
+
+            // membuat nama file unik untuk gambar
+            $namaFile = uniqid() . '.jpg'; // Ubah ekstensi file sesuai format gambar
+
+            // Mengubah data gambar base64 menjadi file dan menyimpannya menggunakan storage
+            Storage::disk('public')->put($namaFile, base64_decode($gambarData));
+
+            // Medapatkan URL gambar 
+            $urlGambar = Storage::disk('public')->url($namaFile);
+
+            // Mengganti data gambar base64 degan url gambar
+            $konten = str_replace($gambar, $urlGambar, $konten);
+        }
+        dd($konten);
+
+        // Mengganti nilai konten dengan konten yang telah diubah
+        $validateData['konten'] = $konten;
+
         $validateData['created_by'] =  auth()->user()->id;
         $validateData['masjid_id'] =  auth()->user()->masjid_id;
         $validateData['slug'] =  Str::slug($request->judul);
