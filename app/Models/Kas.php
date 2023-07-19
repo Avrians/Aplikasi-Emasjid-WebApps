@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasCreatedBy;
+use App\Traits\HasMasjid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use phpDocumentor\Reflection\Types\Null_;
@@ -9,6 +11,8 @@ use phpDocumentor\Reflection\Types\Null_;
 class Kas extends Model
 {
     use HasFactory;
+    use HasCreatedBy, HasMasjid; 
+
     protected $table = "kas";
     protected $fillable = [
         'masjid_id',
@@ -24,14 +28,18 @@ class Kas extends Model
         'tanggal' => 'datetime:d-m-Y H:i'
     ];
 
-    public function masjid()
-    {
-        return $this->belongsTo(Masjid::class);
-    }
-    public function createdBy()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
+    // public function masjid()
+    // {
+    //     return $this->belongsTo(Masjid::class);
+    // }
+    // public function createdBy()
+    // {
+    //     return $this->belongsTo(User::class, 'created_by');
+    // } 
+    // public function scopeUserMasjid($q)
+    // {
+    //     return $q->where('masjid_id', auth()->user()->masjid_id);
+    // }
 
     public function scopeSaldoAkhir($query, $masjidId = null)
     {
@@ -42,9 +50,5 @@ class Kas extends Model
         $masjidId = $masjidId ?? auth()->user()->masjid_id;
         $masjid = Masjid::where('id', $masjidId)->first();
         return $masjid->saldo_akhir ?? 0;
-    }
-    public function scopeUserMasjid($q)
-    {
-        return $q->where('masjid_id', auth()->user()->masjid_id);
     }
 }
