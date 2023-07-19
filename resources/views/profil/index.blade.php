@@ -15,35 +15,25 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Tanggal</th>
-                                <th>Kategori</th>
-                                <th>Keterangan</th>
-                                <th>Pemasukan</th>
-                                <th>Pengeluaran</th>
+                                <th>Judul </th>
+                                <th>Konten</th>
                                 <th>Diinput Oleh</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($profil as $key => $kas)
+                            @foreach ($profil as $key => $profil)
                                 <tr>
-                                    {{-- <td>{{ $key + 1 }}</td>
-                                    <td>{{ $kas->tanggal->translatedFormat('d-m-Y') }}</td>
-                                    <td>{{ $kas->kategori ?? 'umum' }}</td>
-                                    <td>{{ $kas->keterangan }}</td>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $profil->judul }}</td>
+                                    <td>{{ strip_tags($profil->konten) }}</td>
+                                    <td>{{ $profil->createdBy->name }}</td>
                                     <td>
-                                        {{ $kas->jenis == 'masuk' ? formatRupiah($kas->jumlah, true) : '-' }}
-                                    </td>
-                                    <td>
-                                        {{ $kas->jenis == 'keluar' ? formatRupiah($kas->jumlah, true) : '-' }}
-                                    </td>
-                                    <td>{{ $kas->createdBy->name }}</td>
-                                    <td>
-                                        <a href="{{ route('kas.show', $kas->id) }}" class="btn btn-info btn-sm">Detail</a>
-                                        <a href="{{ route('kas.edit', $kas->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="{{ route('profil.show', $profil->id) }}" class="btn btn-info btn-sm">Detail</a>
+                                        <a href="{{ route('profil.edit', $profil->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                         {!! Form::open([
                                             'method' => 'DELETE',
-                                            'route' => ['kas.destroy', $kas->id],
+                                            'route' => ['profil.destroy', $profil->id],
                                             'style' => 'display:inline'
                                         ]) !!}    
                                             @csrf
@@ -51,7 +41,7 @@
                                             <button type="submit" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                         {!! Form::close() !!}
-                                    </td> --}}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -18,4 +18,8 @@ class Profil extends Model
     {
         return $q->where('masjid_id', auth()->user()->masjid_id);
     }
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

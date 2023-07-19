@@ -36,7 +36,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::submit(isset($kas) ? 'Update' : 'Simpan', ['class' => 'btn btn-primary']) !!}
-                        <a href="{{ route('kas.index') }}" class="btn btn-secondary">Batal</a>
+                        <a href="{{ route('profil.index') }}" class="btn btn-secondary">Batal</a>
                     </div>
 
                     {!! Form::close() !!}
