@@ -47,9 +47,6 @@ class ProfilController extends Controller
             'konten' => 'required',
         ]);
 
-        $validateData['created_by'] =  auth()->user()->id;
-        $validateData['masjid_id'] =  auth()->user()->masjid_id;
-        $validateData['slug'] =  Str::slug($request->judul);
         Profil::create($validateData);
         flash('Data sudah disimpan');
         return back();
@@ -60,7 +57,8 @@ class ProfilController extends Controller
      */
     public function show(Profil $profil)
     {
-        //
+        $data['profil'] = $profil;
+        return view('profil.show', $data);
     }
 
     /**
@@ -90,9 +88,6 @@ class ProfilController extends Controller
             'konten' => 'required',
         ]);
 
-        $validateData['created_by'] =  auth()->user()->id;
-        $validateData['masjid_id'] =  auth()->user()->masjid_id;
-        $validateData['slug'] =  Str::slug($request->judul);
         $profil = Profil::findOrFail($profil->id);
         $profil->update($validateData);
         flash('Data berhasil diubah');
@@ -104,6 +99,8 @@ class ProfilController extends Controller
      */
     public function destroy(Profil $profil)
     {
-        //
+        $profil->delete();
+        flash('Data sudah di hapus');
+        return back();  
     }
 }

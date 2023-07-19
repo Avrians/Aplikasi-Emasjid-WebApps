@@ -3,12 +3,17 @@
 namespace App\Models;
 
 use App\Traits\ConvertContentImageBase64ToUrl;
+use App\Traits\GenerateSlug;
+use App\Traits\HasCreatedBy;
+use App\Traits\HasMasjidId;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Profil extends Model
 {
     use HasFactory;
+    use HasCreatedBy, HasMasjidId;
+    use GenerateSlug; 
     use ConvertContentImageBase64ToUrl;
 
     protected $contentName = 'konten';
