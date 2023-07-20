@@ -8,9 +8,17 @@ use Carbon\Carbon;
 
 class KasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kases = Kas::UserMasjid()->latest()->paginate(50);
+        $query = Kas::UserMasjid();
+        if ($request->filled('q')) {
+            $query = $query->where('keterangan', 'LIKE', '%' . $request->q . '%');
+        }
+        if ($request->filled('tanggal')) {
+            $query = $query->where('tanggal', $request->tanggal);
+        }
+
+        $kases = $query->latest()->paginate(50);
         $saldoAkhir = Kas::SaldoAkhir();
         return view('kas.index', compact('kases', 'saldoAkhir'));
     }

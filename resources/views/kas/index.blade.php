@@ -8,13 +8,17 @@
 
             <div class="card">
                 <div class="card-body">
-                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                    {!! Form::open([
+                         'url' => url()->current(),
+                         'method' => 'GET',
+                         'class' => 'row row-cols-lg-auto align-items-center'
+                    ]) !!}
                         <div class="col-auto">
                             <a href="{{ route('kas.create') }}" class="btn btn-primary">Tambah Kas</a>
                         </div>
                         <div class="col-auto ms-auto">
                           <label for="inlineFormInputGroupUsername">Tanggal Transaksi</label>
-                          {!! Form::date('tanggal', request('tanggal', now()), ['class' => 'form-control']) !!}
+                          {!! Form::date('tanggal', request('tanggal'), ['class' => 'form-control']) !!}
                         </div>
                       
                         <div class="col-auto">
@@ -22,10 +26,10 @@
                           {!! Form::text('q', request('q'), ['class' => 'form-control', 'placeholder' => 'Keterangan Transaksi']) !!}
                         </div>
                       
-                        <div class="col-auto">
+                        <div class="col-auto mt-3">
                           <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
-                      </form>
+                      {!! Form::close() !!}
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
