@@ -30,17 +30,17 @@
                           <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                       {!! Form::close() !!}
-                    <div class="table-responsive">
-                        <table class="table table-striped">
+                    <div class="table-responsive mt-3">
+                        <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>Tanggal</th>
+                                    <th>Diinput Oleh</th>
                                     <th>Kategori</th>
                                     <th>Keterangan</th>
-                                    <th>Pemasukan</th>
-                                    <th>Pengeluaran</th>
-                                    <th>Diinput Oleh</th>
+                                    <th class="text-end">Pemasukan</th>
+                                    <th class="text-end">Pengeluaran</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -49,15 +49,15 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $kas->tanggal->translatedFormat('d-m-Y') }}</td>
+                                        <td>{{ $kas->createdBy->name }}</td>
                                         <td>{{ $kas->kategori ?? 'umum' }}</td>
                                         <td>{{ $kas->keterangan }}</td>
-                                        <td>
+                                        <td class="text-end">
                                             {{ $kas->jenis == 'masuk' ? formatRupiah($kas->jumlah, true) : '-' }}
                                         </td>
-                                        <td>
+                                        <td class="text-end">
                                             {{ $kas->jenis == 'keluar' ? formatRupiah($kas->jumlah, true) : '-' }}
                                         </td>
-                                        <td>{{ $kas->createdBy->name }}</td>
                                         <td>
                                             <a href="{{ route('kas.show', $kas->id) }}"
                                                 class="btn btn-info btn-sm">Detail</a>
@@ -77,6 +77,13 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="text-center fw-bold">TOTAL</td>
+                                    <td class="text-end">{{ formatRupiah($totalPemasukan, true) }}</td>
+                                    <td class="text-end"  >{{ formatRupiah($totalPengeluaran, true) }}</td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
 
