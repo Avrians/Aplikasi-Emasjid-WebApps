@@ -16,8 +16,9 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        $profil = Profil::UserMasjid()->latest()->paginate(50);
-        return view('profil.index', compact('profil'));
+        $models = Profil::UserMasjid()->latest()->paginate(50);
+        $title = 'Profil Masjid';
+        return view('profil.index', compact('models', 'title'));
     }
 
     /**
@@ -101,6 +102,6 @@ class ProfilController extends Controller
     {
         $profil->delete();
         flash('Data sudah di hapus');
-        return back();  
+        return back();
     }
 }

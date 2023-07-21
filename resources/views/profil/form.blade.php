@@ -1,7 +1,7 @@
 @extends('layouts.main_admin')
 
 @section('content')
-    <h1 class="h3 mb-3">PROFIL MASJID {{ strtoupper(auth()->user()->masjid->nama) }}</h1>
+    <h1 class="h3 mb-3">FORM PROFIL MASJID {{ strtoupper(auth()->user()->masjid->nama) }}</h1>
 
     <div class="row">
         <div class="col-md-12">
@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        {!! Form::label('judl', 'Judul') !!}
+                        {!! Form::label('judul', 'Judul') !!}
                         {!! Form::text('judul', null, ['class' => 'form-control', 'placeholder' => 'Judul']) !!}
                         <span class="text-danger">{{ $errors->first('judl') }}</span>
                     </div>

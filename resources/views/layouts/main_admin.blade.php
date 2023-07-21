@@ -60,6 +60,12 @@
                                 Masjid</span>
                         </a>
                     </li>
+                    <li class="sidebar-item {{ Route::is('kategori.*') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kategori.index') }}">
+                            <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Kategori
+                                Informasi</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="pages-sign-in.html">
