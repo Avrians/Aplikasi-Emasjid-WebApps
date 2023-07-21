@@ -14,7 +14,8 @@ class KategoriController extends Controller
     public function index()
     {
         $models = Kategori::UserMasjid()->latest()->paginate(50);
-        return view('profil.index', compact('models'));
+        $title = 'Kategori Informasi';
+        return view('kategori.index', compact('models', 'title'));
     }
 
     /**

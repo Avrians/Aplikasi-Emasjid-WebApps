@@ -34,6 +34,7 @@ class ProfilController extends Controller
             'sejarah' => 'Sejarah',
             'struktur-organisasi' => 'Struktur Organisasi'
         ];
+        $data['title'] = 'Tambah Profil Masjid';
         return view('profil.form', $data);
     }
 
@@ -59,6 +60,7 @@ class ProfilController extends Controller
     public function show(Profil $profil)
     {
         $data['profil'] = $profil;
+        $data['title'] = 'Detail Masjid';
         return view('profil.show', $data);
     }
 
@@ -75,6 +77,7 @@ class ProfilController extends Controller
             'sejarah' => 'Sejarah',
             'struktur-organisasi' => 'Struktur Organisasi'
         ];
+        $data['title'] = 'Edit Profil Masjid';  
         return view('profil.form', $data);
     }
 

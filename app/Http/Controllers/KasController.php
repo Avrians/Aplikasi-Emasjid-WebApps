@@ -20,9 +20,10 @@ class KasController extends Controller
 
         $kases = $query->latest()->paginate(50);
         $saldoAkhir = Kas::SaldoAkhir();
+        $title = "Kas Masjid";
         $totalPemasukan = $kases->where('jenis', 'masuk')->sum('jumlah');
         $totalPengeluaran = $kases->where('jenis', 'keluar')->sum('jumlah');
-        return view('kas.index', compact('kases', 'saldoAkhir', 'totalPemasukan', 'totalPengeluaran'));
+        return view('kas.index', compact('kases', 'saldoAkhir', 'totalPemasukan', 'totalPengeluaran', 'title'));
     }
 
     public function create()

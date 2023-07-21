@@ -1,7 +1,7 @@
 @extends('layouts.main_admin')
 
 @section('content')
-    <h1 class="h3 mb-3">FORM PROFIL MASJID {{ strtoupper(auth()->user()->masjid->nama) }}</h1>
+    <h1 class="h3 mb-3">{{ $title }}</h1>
 
     <div class="row">
         <div class="col-md-12">
