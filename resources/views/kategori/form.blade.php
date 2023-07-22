@@ -9,29 +9,21 @@
                 {{-- <h3 class="card-header">{{ isset($kases) ? 'Edit Kas' : 'Tambah Kas' }}</h3> --}}
 
                 <div class="card-body">
-                    {!! Form::model($profil, [
+                    {!! Form::model($model, [
                         'route' => $route,
                         'method' => $method,
                     ]) !!}
 
-                    <div class="form-group mb-3 d-none">
-                        {!! Form::label('kategori', 'Kategori') !!}
-                        {!! Form::select('kategori', $listKategori, null, [
-                            'class' => 'form-control',
-                        ]) !!}
-                        <span class="text-danger">{{ $errors->first('kategori') }}</span>
-                    </div>
-
                     <div class="form-group mb-3">
-                        {!! Form::label('judul', 'Judul') !!}
-                        {!! Form::text('judul', null, ['class' => 'form-control', 'placeholder' => 'Judul']) !!}
+                        {!! Form::label('nama', 'Nama Kategori (Misalnya:Agenda,Informasi Pengajian dan kategori lainnya)') !!}
+                        {!! Form::text('nama', null, ['class' => 'form-control', 'placeholder' => 'Nama Kategori']) !!}
                         <span class="text-danger">{{ $errors->first('judl') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
-                        {!! Form::label('konten', 'Konten / Isi Profil') !!}
-                        {!! Form::textarea('konten', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'Isi Profil','id' => 'summernote','required']) !!}
-                        <span class="text-danger">{{ $errors->first('konten') }}</span>
+                        {!! Form::label('keterangan', 'Keterangan') !!}
+                        {!! Form::textarea('keterangan', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'Keterangan Kategori']) !!}
+                        <span class="text-danger">{{ $errors->first('keterangan') }}</span>
                     </div>
 
                     <div class="form-group mb-3">

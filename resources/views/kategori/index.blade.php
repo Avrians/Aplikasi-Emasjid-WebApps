@@ -15,8 +15,8 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Judul </th>
-                                <th>Konten</th>
+                                <th>NAma </th>
+                                <th>Keterangan</th>
                                 <th>Diinput Oleh</th>
                                 <th>Aksi</th>
                             </tr>
@@ -26,7 +26,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $kategori->judul }}</td>
-                                    <td>{{ strip_tags($kategori->konten) }}</td>
+                                    <td>{{ strip_tags($kategori->keterangan) }}</td>
                                     <td>{{ $kategori->createdBy->name }}</td>
                                     <td>
                                         <a href="{{ route('kategori.show', $kategori->id) }}"

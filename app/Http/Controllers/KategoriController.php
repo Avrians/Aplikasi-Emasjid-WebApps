@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
-use App\Models\Kategori;
 
 class KategoriController extends Controller
 {
@@ -23,15 +24,26 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        $data['model'] = new Kategori();
+        $data['route'] = 'kategori.store';
+        $data['method'] = 'POST';
+        $data['title'] = 'Tambah Kategori Informasi';
+        return view('kategori.form', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreKategoriRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'nama' => 'required',
+            'katerangan' => 'nullabe',
+        ]);
+        $validateData['parent_id'] = 0;
+        Kategori::create($validateData);
+        flash('Data sudah disimpan');
+        return back();
     }
 
     /**
