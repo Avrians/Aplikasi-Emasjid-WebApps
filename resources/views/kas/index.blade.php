@@ -31,7 +31,7 @@
                         </div>
                       {!! Form::close() !!}
                     <div class="table-responsive mt-3">
-                        <table class="table table-striped table-bordered">
+                        <table class="{{ config('app.table_style') }}">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -59,18 +59,15 @@
                                             {{ $kas->jenis == 'keluar' ? formatRupiah($kas->jumlah, true) : '-' }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('kas.show', $kas->id) }}"
-                                                class="btn btn-info btn-sm">Detail</a>
-                                            <a href="{{ route('kas.edit', $kas->id) }}"
-                                                class="btn btn-primary btn-sm">Edit</a>
                                             {!! Form::open([
                                                 'method' => 'DELETE',
                                                 'route' => ['kas.destroy', $kas->id],
                                                 'style' => 'display:inline',
                                             ]) !!}
                                             @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
+                                            <a href="{{ route('kas.edit', $kas->id) }}"
+                                                class="btn btn-primary btn-sm mb-1 mx-1">Edit</a>
+                                            <button type="submit" class="btn btn-danger btn-sm mb-1 mx-1"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                             {!! Form::close() !!}
                                         </td>

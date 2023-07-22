@@ -11,7 +11,7 @@
                     <div class="mb-3">
                         <a href="{{ route('kategori.create') }}" class="btn btn-primary">Tambah Kategori</a>
                     </div>
-                    <table class="table table-striped">
+                    <table class="{{ config('app.table_style') }}">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -30,7 +30,7 @@
                                     <td>{{ $kategori->createdBy->name }}</td>
                                     <td>
                                         <a href="{{ route('kategori.edit', $kategori->id) }}"
-                                            class="btn btn-primary btn-sm">Edit</a>
+                                            class="btn btn-primary btn-sm mb-1 mx-1">Edit</a>
                                         {!! Form::open([
                                             'method' => 'DELETE',
                                             'route' => ['kategori.destroy', $kategori->id],
@@ -38,7 +38,7 @@
                                         ]) !!}
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
+                                        <button type="submit" class="btn btn-danger btn-sm mb-1 mx-1"
                                             onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                         {!! Form::close() !!}
                                     </td>

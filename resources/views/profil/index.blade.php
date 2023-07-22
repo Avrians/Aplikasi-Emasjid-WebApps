@@ -11,7 +11,7 @@
                     <div class="mb-3">
                         <a href="{{ route('profil.create') }}" class="btn btn-primary">Tambah Profile</a>
                     </div>
-                    <table class="table table-striped">
+                    <table class="{{ config('app.table_style') }}">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -30,9 +30,9 @@
                                     <td>{{ $profil->createdBy->name }}</td>
                                     <td>
                                         <a href="{{ route('profil.show', $profil->id) }}"
-                                            class="btn btn-info btn-sm">Detail</a>
+                                            class="btn btn-info btn-sm mb-1 mx-1">Detail</a>
                                         <a href="{{ route('profil.edit', $profil->id) }}"
-                                            class="btn btn-primary btn-sm">Edit</a>
+                                            class="btn btn-primary btn-sm mb-1 mx-1">Edit</a>
                                         {!! Form::open([
                                             'method' => 'DELETE',
                                             'route' => ['profil.destroy', $profil->id],
@@ -40,7 +40,7 @@
                                         ]) !!}
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
+                                        <button type="submit" class="btn btn-danger btn-sm mb-1 mx-1"
                                             onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                         {!! Form::close() !!}
                                     </td>
