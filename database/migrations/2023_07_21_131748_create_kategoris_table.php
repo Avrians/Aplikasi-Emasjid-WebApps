@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('kategoris', function (Blueprint $table) {
             $table->id();
             $table->foreignId('masjid_id')->index();
-            $table->foreignId('parent_id')->index();
+            $table->foreignId('parent_id')->index()->default(0); 
             $table->string('slug');
             $table->string('nama');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->foreignId('created_by')->index();
             $table->timestamps();
         });

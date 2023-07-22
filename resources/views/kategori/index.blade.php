@@ -25,12 +25,10 @@
                             @foreach ($models as $key => $kategori)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $kategori->judul }}</td>
+                                    <td>{{ $kategori->nama }}</td>
                                     <td>{{ strip_tags($kategori->keterangan) }}</td>
                                     <td>{{ $kategori->createdBy->name }}</td>
                                     <td>
-                                        <a href="{{ route('kategori.show', $kategori->id) }}"
-                                            class="btn btn-info btn-sm">Detail</a>
                                         <a href="{{ route('kategori.edit', $kategori->id) }}"
                                             class="btn btn-primary btn-sm">Edit</a>
                                         {!! Form::open([

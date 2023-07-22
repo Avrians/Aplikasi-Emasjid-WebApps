@@ -38,9 +38,8 @@ class KategoriController extends Controller
     {
         $validateData = $request->validate([
             'nama' => 'required',
-            'katerangan' => 'nullabe',
+            'keterangan' => 'nullable',
         ]);
-        $validateData['parent_id'] = 0;
         Kategori::create($validateData);
         flash('Data sudah disimpan');
         return back();
@@ -59,15 +58,27 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        $data['model'] = $kategori;
+        $data['route'] = ['kategori.update', $kategori->id];
+        $data['method'] = 'PUT';
+        $data['title'] = 'Edit Kategori Informasi';  
+        return view('kategori.form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKategoriRequest $request, Kategori $kategori)
+    public function update(Request $request, Kategori $kategori)
     {
-        //
+        $validateData = $request->validate([
+            'nama' => 'required',
+            'keterangan' => 'nullable',
+        ]);
+
+        $model = Kategori::findOrFail($kategori->id);
+        $model->update($validateData);
+        flash('Data berhasil diubah');
+        return back();
     }
 
     /**

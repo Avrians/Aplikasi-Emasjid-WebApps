@@ -17,7 +17,7 @@
                     <div class="form-group mb-3">
                         {!! Form::label('nama', 'Nama Kategori (Misalnya:Agenda,Informasi Pengajian dan kategori lainnya)') !!}
                         {!! Form::text('nama', null, ['class' => 'form-control', 'placeholder' => 'Nama Kategori']) !!}
-                        <span class="text-danger">{{ $errors->first('judl') }}</span>
+                        <span class="text-danger">{{ $errors->first('nama') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
@@ -28,7 +28,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::submit(isset($kas) ? 'Update' : 'Simpan', ['class' => 'btn btn-primary']) !!}
-                        <a href="{{ route('profil.index') }}" class="btn btn-secondary">Batal</a>
+                        <a href="{{ route('kategori.index') }}" class="btn btn-secondary">Batal</a>
                     </div>
 
                     {!! Form::close() !!}

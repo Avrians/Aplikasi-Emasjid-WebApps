@@ -71,13 +71,13 @@ class ProfilController extends Controller
     {
         $data['profil'] = $profil;
         $data['route'] = ['profil.update', $profil->id];
-        $data['method'] = 'PU T';
+        $data['method'] = 'PUT';
         $data['listKategori'] = [
             'visi-misi' => 'Misi Visi',
             'sejarah' => 'Sejarah',
             'struktur-organisasi' => 'Struktur Organisasi'
         ];
-        $data['title'] = 'Edit Profil Masjid';  
+        $data['title'] = 'Edit Profil Masjid';
         return view('profil.form', $data);
     }
 
