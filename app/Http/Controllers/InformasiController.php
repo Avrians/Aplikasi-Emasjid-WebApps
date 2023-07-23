@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
+use App\Models\Informasi;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreInformasiRequest;
 use App\Http\Requests\UpdateInformasiRequest;
-use App\Models\Informasi;
-use App\Models\Kategori;
 
 class InformasiController extends Controller
 {
@@ -35,9 +36,17 @@ class InformasiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInformasiRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'kategori_id' => 'nullable',
+            'judul' => 'required',
+            'konten' => 'required',
+        ]);
+
+        Informasi::create($validateData);
+        flash('Data sudah disimpan');
+        return back();
     }
 
     /**
@@ -45,7 +54,9 @@ class InformasiController extends Controller
      */
     public function show(Informasi $informasi)
     {
-        //
+        $data['informasi'] = $informasi;
+        $data['title'] = 'Detail Masjid';
+        return view('informasi.show', $data);
     }
 
     /**
@@ -53,15 +64,29 @@ class InformasiController extends Controller
      */
     public function edit(Informasi $informasi)
     {
-        //
+        $data['model'] = $informasi;
+        $data['route'] = ['informasi.update', $informasi->id];
+        $data['method'] = 'PUT';
+        $data['listKategori'] = Kategori::pluck('nama', 'id');
+        $data['title'] = 'Edit Informasi ';
+        return view('informasi.form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInformasiRequest $request, Informasi $informasi)
+    public function update(Request $request, Informasi $informasi)
     {
-        //
+        $validateData = $request->validate([
+            'kategori_id' => 'nullable',
+            'judul' => 'required',
+            'konten' => 'required',
+        ]);
+
+        $model = Informasi::findOrFail($informasi->id);
+        $model->update($validateData);
+        flash('Data berhasil diubah');
+        return back();
     }
 
     /**
@@ -69,6 +94,8 @@ class InformasiController extends Controller
      */
     public function destroy(Informasi $informasi)
     {
-        //
+        $informasi->delete();
+        flash('Data sudah di hapus');
+        return back();
     }
 }

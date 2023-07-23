@@ -15,11 +15,12 @@
                     ]) !!}
 
                     <div class="form-group mb-3">
-                        {!! Form::label('kategori', 'Kategori') !!}
-                        {!! Form::select('kategori', $listKategori, null, [
+                        {!! Form::label('kategori_id', 'Kategori') !!}
+                        {!! Form::select('kategori_id', $listKategori, null, [
                             'class' => 'form-control',
+                            'placeholder' => 'Pilih Kategori Informasi'
                         ]) !!}
-                        <span class="text-danger">{{ $errors->first('kategori') }}</span>
+                        <span class="text-danger">{{ $errors->first('kategori_id') }}</span>
                     </div>
 
                     <div class="form-group mb-3">

@@ -15,8 +15,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Judul </th>
-                                <th>Konten</th>
+                                <th>Informasi</th>
                                 <th>Diinput Oleh</th>
                                 <th>Aksi</th>
                             </tr>
@@ -25,8 +24,10 @@
                             @foreach ($models as $key => $informasi)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $informasi->judul }}</td>
-                                    <td>{{ strip_tags($informasi->konten) }}</td>
+                                    <td>
+                                        <div class="fw-bold">{{ $informasi->judul }}</div>
+                                        {{ strip_tags($informasi->konten) }}
+                                    </td>
                                     <td>{{ $informasi->createdBy->name }}</td>
                                     <td>
                                         <a href="{{ route('informasi.show', $informasi->id) }}"
