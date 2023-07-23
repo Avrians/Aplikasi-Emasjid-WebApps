@@ -13,10 +13,9 @@ class Profil extends Model
 {
     use HasFactory;
     use HasCreatedBy, HasMasjid;
-    use GenerateSlug; 
+    use GenerateSlug;
     use ConvertContentImageBase64ToUrl;
 
     protected $contentName = 'konten';
     protected $guarded = [];
-
 }

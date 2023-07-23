@@ -16,11 +16,25 @@ trait HasMasjid
 
   public function scopeUserMasjid($q)
   {
-      return $q->where('masjid_id', auth()->user()->masjid_id);
+    return $q->where('masjid_id', auth()->user()->masjid_id);
   }
 
   public function masjid(): BelongsTo
   {
-      return $this->belongsTo(Masjid::class);
+    return $this->belongsTo(Masjid::class);
+  }
+
+  /**
+   * Retrieve the model for a bound value.
+   *
+   * @param  mixed  $value
+   * @param  string|null  $field
+   * @return \Illuminate\Database\Eloquent\Model|null
+   */
+  public function resolveRouteBinding($value, $field = null)
+  {
+    return $this->where('masjid_id', auth()->user()->masjid_id)
+      ->where('id', $value)
+      ->firstOrFail();
   }
 }

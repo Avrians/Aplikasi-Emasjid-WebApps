@@ -75,8 +75,8 @@ class KategoriController extends Controller
             'keterangan' => 'nullable',
         ]);
 
-        $model = Kategori::findOrFail($kategori->id);
-        $model->update($validateData);
+        // $kategori = Kategori::findOrFail($kategori->id);
+        $kategori->update($validateData);
         flash('Data berhasil diubah');
         return back();
     }

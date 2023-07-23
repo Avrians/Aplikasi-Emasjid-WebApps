@@ -67,9 +67,9 @@ class ProfilController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Profil $profil)
     {
-        $profil = Profil::userMasjid()->where('id', $id)->firstOrFail();
+        // $profil = Profil::userMasjid()->where('id', $id)->firstOrFail();
         $data['profil'] = $profil;
         $data['route'] = ['profil.update', $profil->id];
         $data['method'] = 'PUT';
@@ -93,7 +93,7 @@ class ProfilController extends Controller
             'konten' => 'required',
         ]);
 
-        // $profil = Profil::findOrFail($profil->id);
+        // $profil = Profil::findOrFail($profil->id);  
         $profil->update($validateData);
         flash('Data berhasil diubah');
         return back();

@@ -83,8 +83,7 @@ class InformasiController extends Controller
             'konten' => 'required',
         ]);
 
-        $model = Informasi::findOrFail($informasi->id);
-        $model->update($validateData);
+        $informasi->update($validateData);
         flash('Data berhasil diubah');
         return back();
     }
