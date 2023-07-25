@@ -15,8 +15,9 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Informasi</th>
-                                <th>Diinput Oleh</th>
+                                <th>Bank</th>
+                                <th>No Rekening</th>
+                                <th>Atas Nama Rekening</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -25,10 +26,10 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>
-                                        <div class="fw-bold">{{ $masjidbank->judul }}</div>
-                                        {{ strip_tags($masjidbank->konten) }}
+                                        <div class="fw-bold">{{ $masjidbank->nama_bank }}</div>
                                     </td>
-                                    <td>{{ $masjidbank->createdBy->name }}</td>
+                                    <td>{{ $masjidbank->nomor_rekening }}</td>
+                                    <td>{{ $masjidbank->nama_rekening }}</td>
                                     <td>
                                         <a href="{{ route('masjidbank.edit', $masjidbank->id) }}"
                                             class="btn btn-primary btn-sm mb-1 mx-1">Edit</a>

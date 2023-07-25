@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
+use App\Models\MasjidBank;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreMasjidBankRequest;
 use App\Http\Requests\UpdateMasjidBankRequest;
-use App\Models\MasjidBank;
 
 class MasjidBankController extends Controller
 {
@@ -26,6 +28,7 @@ class MasjidBankController extends Controller
         $data['model'] = new MasjidBank();
         $data['route'] = 'masjidbank.store';
         $data['method'] = 'POST';
+        $data['listBank'] = Bank::pluck('nama_bank', 'id');
         $data['title'] = 'Tambah Bank Masjid';
         return view('masjidbank.form', $data);
     }
@@ -33,9 +36,21 @@ class MasjidBankController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMasjidBankRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'bank_id' => 'required|exists:banks,id',
+            'nama_rekening' => 'required',
+            'nomor_rekening' => 'required',
+        ]);
+        $bank = Bank::findOrfail($validateData['bank_id']);
+        unset($validateData['bank_id']);
+        $validateData['kode_bank'] =  $bank->sandi_bank;
+        $validateData['nama_bank'] =  $bank->nama_bank;
+
+        MasjidBank::create($validateData);
+        flash('Data sudah disimpan');
+        return back();
     }
 
     /**
@@ -49,24 +64,42 @@ class MasjidBankController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MasjidBank $masjidBank)
+    public function edit(MasjidBank $masjidbank)
     {
-        //
+        $data['model'] = $masjidbank;
+        $data['route'] = ['masjidbank.update', $masjidbank->id];
+        $data['method'] = 'PUT';
+        $data['listBank'] = Bank::pluck('nama_bank', 'id');
+        $data['title'] = 'Edit Bank Masjid';
+        return view('masjidbank.form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMasjidBankRequest $request, MasjidBank $masjidBank)
+    public function update(Request $request, MasjidBank $masjidbank)
     {
-        //
+        $validateData = $request->validate([
+            'bank_id' => 'required|exists:banks,id',
+            'nama_rekening' => 'required',
+            'nomor_rekening' => 'required',
+        ]);
+        $bank = Bank::findOrfail($validateData['bank_id']);
+        unset($validateData['bank_id']);
+        $validateData['kode_bank'] =  $bank->sandi_bank;
+        $validateData['nama_bank'] =  $bank->nama_bank;
+        $masjidbank->update($validateData);
+        flash('Data berhasil diubah');
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MasjidBank $masjidBank)
+    public function destroy(MasjidBank $masjidbank)
     {
-        //
+        $masjidbank->delete();
+        flash('Data sudah di hapus');
+        return back();
     }
 }
