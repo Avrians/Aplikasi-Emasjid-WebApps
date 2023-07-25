@@ -15,24 +15,20 @@
                     ]) !!}
 
                     <div class="form-group mb-3">
-                        {!! Form::label('kategori_id', 'Kategori') !!}
-                        {!! Form::select('kategori_id', $listKategori, null, [
-                            'class' => 'form-control',
-                            'placeholder' => 'Pilih Kategori Informasi'
-                        ]) !!}
-                        <span class="text-danger">{{ $errors->first('kategori_id') }}</span>
+                        {!! Form::label('nama_bank', 'Nama Bank') !!}
+                        {!! Form::text('nama_bank', null, ['class' => 'form-control', 'placeholder' => 'Judul']) !!}
+                        <span class="text-danger">{{ $errors->first('nama_bank') }}</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        {!! Form::label('nama_rekening', 'Nama Pemilik Rekening') !!}
+                        {!! Form::text('nama_rekening', null, ['class' => 'form-control', 'placeholder' => 'Judul']) !!}
+                        <span class="text-danger">{{ $errors->first('nama_rekening') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
-                        {!! Form::label('judul', 'Judul') !!}
-                        {!! Form::text('judul', null, ['class' => 'form-control', 'placeholder' => 'Judul']) !!}
-                        <span class="text-danger">{{ $errors->first('judul') }}</span>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        {!! Form::label('konten', 'Konten / Isi Profil') !!}
-                        {!! Form::textarea('konten', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'Isi Profil','id' => 'summernote','required']) !!}
-                        <span class="text-danger">{{ $errors->first('konten') }}</span>
+                        {!! Form::label('nomor_rekening', 'Nomor Rekening') !!}
+                        {!! Form::text('nomor_rekening', null, ['class' => 'form-control', 'placeholder' => 'Judul']) !!}
+                        <span class="text-danger">{{ $errors->first('nomor_rekening') }}</span>
                     </div>
 
                     <div class="form-group mb-3">

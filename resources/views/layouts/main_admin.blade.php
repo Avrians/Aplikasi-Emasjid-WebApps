@@ -71,6 +71,11 @@
                             <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Informasi Masjid</span>
                         </a>
                     </li>
+                    <li class="sidebar-item {{ Route::is('masjidbank.*') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('masjidbank.index') }}">
+                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Bank</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
