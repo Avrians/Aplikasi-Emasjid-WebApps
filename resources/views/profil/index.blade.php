@@ -24,7 +24,7 @@
                         <tbody>
                             @foreach ($models as $key => $profil)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $profil->judul }}</td>
                                     <td>{{ strip_tags($profil->konten) }}</td>
                                     <td>{{ $profil->createdBy->name }}</td>

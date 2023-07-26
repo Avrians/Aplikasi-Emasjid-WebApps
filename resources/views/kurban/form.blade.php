@@ -15,13 +15,24 @@
                     ]) !!}
 
                     <div class="form-group mb-3">
-                        {!! Form::label('tahun_hijriah', 'Judul') !!}
-                        {!! Form::text('judul', null, ['class' => 'form-control', 'placeholder' => 'Judul']) !!}
+                        {!! Form::label('tahun_hijriah', 'Tahun Hijriah') !!}
+                        {!! Form::selectRange('tahun_hijriah', 1445, 1460, null, ['class' => 'form-control']) !!}
                         <span class="text-danger">{{ $errors->first('judul') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
-                        {!! Form::label('konten', 'Konten / Isi Profil') !!}
+                        {!! Form::label('tahun_masehi', 'Tahun Masehi') !!}
+                        {!! Form::selectRange('tahun_masehi', 2023, date('Y'), null, ['class' => 'form-control']) !!}
+                        <span class="text-danger">{{ $errors->first('judul') }}</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        {!! Form::label('tanggal_akhir_pendaftaran', 'Tanggal Akhir Pendaftaran') !!}
+                        {!! Form::date('tanggal_akhir_pendaftaran', now(), ['class' => 'form-control']) !!}
+                        <span class="text-danger">{{ $errors->first('judul') }}</span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {!! Form::label('konten', 'Informasi / Pengumuman Kurban') !!}
                         {!! Form::textarea('konten', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'Isi Profil','id' => 'summernote','required']) !!}
                         <span class="text-danger">{{ $errors->first('konten') }}</span>
                     </div>

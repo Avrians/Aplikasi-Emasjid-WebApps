@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('tahun_hijriah');
             $table->integer('tahun_masehi');
             $table->longText('konten');
-            $table->dateTime('tanggal_akhir_pembayaran');
+            $table->dateTime('tanggal_akhir_pendaftaran');
             $table->foreignId('created_by')->index();
             $table->timestamps();
         });

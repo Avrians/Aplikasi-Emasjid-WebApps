@@ -12,9 +12,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Kurban extends Model
 {
     use HasFactory;
-    use HasCreatedBy, HasMasjid, GenerateSlug;
+    use HasCreatedBy, HasMasjid;
     use ConvertContentImageBase64ToUrl;
 
     protected $contentName = 'konten';
     protected $guarded = [];
+    protected $casts = [
+        'tanggal_akhir_pendaftaran' => 'date',
+    ];
 }

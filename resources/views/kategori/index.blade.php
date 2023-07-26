@@ -24,7 +24,7 @@
                         <tbody>
                             @foreach ($models as $key => $kategori)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $kategori->nama }}</td>
                                     <td>{{ strip_tags($kategori->keterangan) }}</td>
                                     <td>{{ $kategori->createdBy->name }}</td>

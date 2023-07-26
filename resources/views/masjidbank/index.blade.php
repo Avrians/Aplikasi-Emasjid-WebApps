@@ -24,7 +24,7 @@
                         <tbody>
                             @foreach ($models as $key => $masjidbank)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <div class="fw-bold">{{ $masjidbank->nama_bank }}</div>
                                     </td>

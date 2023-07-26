@@ -23,7 +23,7 @@
                         <tbody>
                             @foreach ($models as $key => $informasi)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <div class="fw-bold">{{ $informasi->judul }}</div>
                                         {{ strip_tags($informasi->konten) }}

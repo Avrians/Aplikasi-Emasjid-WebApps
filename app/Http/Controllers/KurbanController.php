@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kurban;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreKurbanRequest;
 use App\Http\Requests\UpdateKurbanRequest;
-use App\Models\Kurban;
 
 class KurbanController extends Controller
 {
@@ -33,9 +34,18 @@ class KurbanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreKurbanRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'tahun_hijriah' => 'required',
+            'tahun_masehi' => 'required',
+            'tanggal_akhir_pendaftaran' => 'required',
+            'konten' => 'required',
+        ]);
+
+        Kurban::create($validateData);
+        flash('Data sudah disimpan');
+        return back();
     }
 
     /**
@@ -51,15 +61,28 @@ class KurbanController extends Controller
      */
     public function edit(Kurban $kurban)
     {
-        //
+        $data['model'] = $kurban;
+        $data['route'] = ['kurban.update', $kurban->id];
+        $data['method'] = 'PUT';
+        $data['title'] = 'Edit Informasi Kurban ';
+        return view('kurban.form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKurbanRequest $request, Kurban $kurban)
+    public function update(Request $request, Kurban $kurban)
     {
-        //
+        $validateData = $request->validate([
+            'tahun_hijriah' => 'required',
+            'tahun_masehi' => 'required',
+            'tanggal_akhir_pendaftaran' => 'required',
+            'konten' => 'required',
+        ]);
+
+        $kurban->update($validateData);
+        flash('Data berhasil diubah');
+        return back();
     }
 
     /**
@@ -67,6 +90,8 @@ class KurbanController extends Controller
      */
     public function destroy(Kurban $kurban)
     {
-        //
+        $kurban->delete();
+        flash('Data sudah di hapus');
+        return back();
     }
 }

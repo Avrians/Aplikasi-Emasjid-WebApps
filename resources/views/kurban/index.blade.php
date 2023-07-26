@@ -15,19 +15,22 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Informasi</th>
-                                <th>Diinput Oleh</th>
+                                <th>Tahun</th>
+                                <th>Tanggal Akhir Daftar</th>
+                                <th>Konten</th>
+                                <th>Dibuat Oleh </th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($models as $key => $kurban)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <div class="fw-bold">{{ $kurban->judul }}</div>
-                                        {{ strip_tags($kurban->konten) }}
+                                        {{ $kurban->tahun_hijriah }}H / {{ $kurban->tahun_masehi }}
                                     </td>
+                                    <td>{{ $kurban->tanggal_akhir_pendaftaran->format('d-m-Y') }}</td>
+                                    <td>{{ strip_tags($kurban->konten) }}</td>
                                     <td>{{ $kurban->createdBy->name }}</td>
                                     <td>
                                         <a href="{{ route('kurban.show', $kurban->id) }}"

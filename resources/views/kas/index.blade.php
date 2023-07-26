@@ -47,7 +47,7 @@
                             <tbody>
                                 @foreach ($kases as $key => $kas)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $kas->tanggal->translatedFormat('d-m-Y') }}</td>
                                         <td>{{ $kas->createdBy->name }}</td>
                                         <td>{{ $kas->kategori ?? 'umum' }}</td>
