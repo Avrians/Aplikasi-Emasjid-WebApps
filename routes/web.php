@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KurbanController;
 use App\Http\Controllers\MasjidBankController;
 use App\Http\Controllers\MasjidController;
 use App\Http\Controllers\ProfilController;
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('masjid', MasjidController::class);
 
     Route::middleware(EnsureDataMasjidCompleted::class)->group(function () {
+        Route::resource('kurban', KurbanController::class);
         Route::resource('masjidbank', MasjidBankController::class);
         Route::resource('informasi', InformasiController::class);
         Route::resource('kategori', KategoriController::class);
