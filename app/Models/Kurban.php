@@ -8,6 +8,8 @@ use App\Traits\HasCreatedBy;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\ConvertContentImageBase64ToUrl;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use PhpParser\Node\Expr\FuncCall;
 
 class Kurban extends Model
 {
@@ -20,4 +22,9 @@ class Kurban extends Model
     protected $casts = [
         'tanggal_akhir_pendaftaran' => 'date',
     ];
+
+    public function kurbanHewan(): HasMany
+    {
+        return $this->hasMany(KurbanHewan::class);
+    }
 }

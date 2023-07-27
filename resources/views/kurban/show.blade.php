@@ -11,10 +11,17 @@
                     <h3>Tahun Kurban {{ $model->tahun_hijriah }}H / {{ $model->tahun_masehi }}</h3>
                     <h6> <i class="align-middle" data-feather="calendar"></i> Tanggal Akhir Pendaftaran : <b>{{ $model->tanggal_akhir_pendaftaran->format('d-m-Y') }}</b></h6>
                     <h6> <i class="align-middle" data-feather="user"></i> Create By : <b>{{ $model->createdBy->name }}</b></h6>
-                    <p>Informasi :{!! $model->konten !!}</p>
+                    <p>{!! $model->konten !!}</p>
+                    <hr>
+                    <h3>Data Hewan Kurban</h3>
+                    @if ($model->kurbanHewan->count() == 0)
+                        <div class="text-center">Belum ada data.
+                            <a href="{{ route('kurbanhewan.create', ['kurban_id' => $model->id]) }}">Buat Baru</a>
+                        </div>
+                    @endif
 
                     <div class="form-group mb-3">
-                        <a href="{{ route('kurban.index') }}" class="btn btn-secondary">Batal</a>
+                        <a href="{{ route('kurban.index') }}" class="btn btn-secondary">Kembali</a>
                     </div>
                 </div>
             </div>
