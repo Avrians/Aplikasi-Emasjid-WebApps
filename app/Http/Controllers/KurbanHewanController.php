@@ -21,7 +21,12 @@ class KurbanHewanController extends Controller
      */
     public function create()
     {
-        //
+        $data['model'] = new KurbanHewan();
+        $data['route'] = 'kurbanhewan.store';
+        $data['method'] = 'POST';
+        $data['title'] = 'Tambah Informasi Hewan Kurban';
+        $data['kurban_id'] = request('kurban_id');
+        return view('kurbanhewan.form', $data);
     }
 
     /**
