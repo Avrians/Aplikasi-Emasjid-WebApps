@@ -25,7 +25,7 @@ class KurbanHewanController extends Controller
         $data['route'] = 'kurbanhewan.store';
         $data['method'] = 'POST';
         $data['title'] = 'Tambah Informasi Hewan Kurban';
-        $data['kurban_id'] = request('kurban_id');
+        $data['kurbanId'] = request('kurban_id');
         return view('kurbanhewan.form', $data);
     }
 
@@ -34,7 +34,9 @@ class KurbanHewanController extends Controller
      */
     public function store(StoreKurbanHewanRequest $request)
     {
-        //
+        KurbanHewan::create($request->validated());
+        flash('Data berhasil disimpan');
+        return back();
     }
 
     /**

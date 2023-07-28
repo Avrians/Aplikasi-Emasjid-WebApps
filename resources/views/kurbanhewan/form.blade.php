@@ -9,16 +9,21 @@
                 {{-- <h3 class="card-header">{{ isset($kases) ? 'Edit Kas' : 'Tambah Kas' }}</h3> --}}
 
                 <div class="card-body">
+                    <div class="alert alert-secondary" role="alert">
+                        Tanda * wajib diisi
+                    </div>
                     {!! Form::model($model, [
                         'route' => $route,
                         'method' => $method,
                     ]) !!}
 
+                    {!! Form::hidden('kurban_id', $kurbanId, []) !!}
                     <div class="form-group mb-3">
-                        {!! Form::label('hewan', 'Jenis Hewan') !!}
+                        {!! Form::label('hewan', 'Jenis Hewan*') !!}
                         {!! Form::select('hewan', [
                             'sapi' => 'Sapi',
                             'kambing' => 'Kambing',
+                            'domba' => 'Domba',
                             'kerbau' => 'Kerbau',
                             'onta' => 'Onta',
                         ], null, ['class' => 'form-control']) !!}
@@ -31,15 +36,21 @@
                         <span class="text-danger">{{ $errors->first('kriteria') }}</span>
                     </div>
                     <div class="form-group mb-3">
-                        {!! Form::label('tanggal_akhir_pendaftaran', 'Tanggal Akhir Pendaftaran') !!}
-                        {!! Form::date('tanggal_akhir_pendaftaran', now(), ['class' => 'form-control']) !!}
-                        <span class="text-danger">{{ $errors->first('judul') }}</span>
+                        {!! Form::label('iuran_perorang', 'Iuran Perorang*') !!}
+                        {!! Form::text('iuran_perorang', null, ['class' => 'form-control rupiah']) !!}
+                        <span class="text-danger">{{ $errors->first('iuran_perorang') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
-                        {!! Form::label('konten', 'Informasi / Pengumuman Kurban') !!}
-                        {!! Form::textarea('konten', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'Isi Profil','id' => 'summernote','required']) !!}
-                        <span class="text-danger">{{ $errors->first('konten') }}</span>
+                        {!! Form::label('harga', 'Harga Hewan') !!}
+                        {!! Form::text('harga', null, ['class' => 'form-control rupiah']) !!}
+                        <span class="text-danger">{{ $errors->first('harga') }}</span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {!! Form::label('biaya_operasional', 'Biaya Operasional') !!}
+                        {!! Form::text('biaya_operasional', null, ['class' => 'form-control rupiah']) !!}
+                        <span class="text-danger">{{ $errors->first('biaya_operasional') }}</span>
                     </div>
 
                     <div class="form-group mb-3">

@@ -16,7 +16,7 @@
                     </h6>
                     <p>{!! $model->konten !!}</p>
                     <hr>
-                    <h3>Data Hewan Kurban</h3>\
+                    <h3>Data Hewan Kurban</h3>
                     @if ($model->kurbanHewan->count() == 1)
                         <div class="text-center">Belum ada data.
                             <a href="{{ route('kurbanhewan.create', ['kurban_id' => $model->id]) }}" class="btn btn-primary">Buat Baru</a>
