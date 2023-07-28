@@ -17,7 +17,7 @@
                         'method' => $method,
                     ]) !!}
 
-                    {!! Form::hidden('kurban_id', $kurbanId, []) !!}
+                    {!! Form::hidden('kurban_id', $kurban->id, []) !!}
                     <div class="form-group mb-3">
                         {!! Form::label('hewan', 'Jenis Hewan*') !!}
                         {!! Form::select('hewan', [
@@ -55,7 +55,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::submit(isset($kas) ? 'Update' : 'Simpan', ['class' => 'btn btn-primary']) !!}
-                        <a href="{{ route('kurban.index') }}" class="btn btn-secondary">Batal</a>
+                        <a href="{{ route('kurban.show', $kurban->id) }}" class="btn btn-secondary">Kembali</a>
                     </div>
 
                     {!! Form::close() !!}

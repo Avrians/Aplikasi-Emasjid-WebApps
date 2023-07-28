@@ -53,8 +53,9 @@ class KurbanController extends Controller
      */
     public function show(Kurban $kurban)
     {
-        $data['model'] = $kurban;
+        $data['kurban'] = $kurban;
         $data['title'] = 'Detail Masjid';
+        // dd($data);
         return view('kurban.show', $data);
     }
 

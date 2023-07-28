@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreKurbanHewanRequest;
 use App\Http\Requests\UpdateKurbanHewanRequest;
+use App\Models\Kurban;
 use App\Models\KurbanHewan;
 
 class KurbanHewanController extends Controller
@@ -21,11 +22,12 @@ class KurbanHewanController extends Controller
      */
     public function create()
     {
+        $kurban = Kurban::UserMasjid()->where('id', request('kurban_id'))->firstOrFail();
         $data['model'] = new KurbanHewan();
         $data['route'] = 'kurbanhewan.store';
         $data['method'] = 'POST';
         $data['title'] = 'Tambah Informasi Hewan Kurban';
-        $data['kurbanId'] = request('kurban_id');
+        $data['kurban'] = $kurban;
         return view('kurbanhewan.form', $data);
     }
 
