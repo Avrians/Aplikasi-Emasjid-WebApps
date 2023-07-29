@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kurban_hewans', function (Blueprint $table) {
+        Schema::create('kurban_pesertas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('created_by')->index();
             $table->foreignId('masjid_id')->index();
             $table->foreignId('kurban_id')->index();
-            $table->foreignId('created_by')->index();
-            $table->string('hewan');
-            $table->string('kriteria')->nullable();
-            $table->bigInteger('harga')->nullable();
-            $table->bigInteger('iuran_perorang');
-            $table->bigInteger('biaya_operasional')->nullable();
+            $table->foreignId('kurban_hewan_id')->index();
+            $table->foreignId('peserta_id')->index();
+            $table->bigInteger('total_bayar');
+            $table->dateTime('tanggal_bayar');
+            $table->string('metode_bayar');
+            $table->string('bukti_bayar');
+            $table->string('status_bayar');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kurban_hewans');
+        Schema::dropIfExists('kurban_pesertas');
     }
 };
