@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateKurbanHewanRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateKurbanHewanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,37 @@ class UpdateKurbanHewanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // 'kurban_id' => 'required|exists:kurbans,id', // exitst ini menunjukkan bahwa si ID tersebut apakah ada di table kurban, kolom ID
+            'kurban_id' => [
+                'required',
+                Rule::exists('kurbans', 'id')->where('masjid_id', auth()->user()->masjid_id)
+            ],
+            'hewan' => 'required|in:kambing,sapi,domba,kerbau,onta',
+            'iuran_perorang' => 'required|numeric',
+            'kriteria' => 'nullable',
+            'harga' => 'nullable|numeric',
+            'biaya_operasional' => 'nullable|numeric',
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if ($this->harga != null) {
+            $this->merge([
+                'harga' => str_replace('.', '', $this->harga),
+            ]);
+        }
+
+        if ($this->biaya_operasional != null) {
+            $this->merge([
+                'biaya_operasional' => str_replace('.', '', $this->biaya_operasional),
+            ]);
+        }
+
+        $this->merge([
+            'iuran_perorang' => str_replace('.', '', $this->iuran_perorang),
+            // 'harga' => str_replace('.', '', $this->harga),
+            // 'biaya_operasional' => str_replace('.', '', $this->biaya_operasional),
+        ]);
     }
 }

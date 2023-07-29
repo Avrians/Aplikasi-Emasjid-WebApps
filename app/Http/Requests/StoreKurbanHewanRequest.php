@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreKurbanHewanRequest extends FormRequest
@@ -22,11 +23,11 @@ class StoreKurbanHewanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kurban_id' => 'required|exists:kurbans,id', // exitst ini menunjukkan bahwa si ID tersebut apakah ada di table kurban, kolom ID
-            // 'kurban_id' => [
-            //     'required',
-            //     Rule::exists('kurbans', 'id')->where('masjid_id', auth()->user()->masjid_id)
-            // ],
+            // 'kurban_id' => 'required|exists:kurbans,id', // exitst ini menunjukkan bahwa si ID tersebut apakah ada di table kurban, kolom ID
+            'kurban_id' => [
+                'required',
+                Rule::exists('kurbans', 'id')->where('masjid_id', auth()->user()->masjid_id)
+            ],
             'hewan' => 'required|in:kambing,sapi,domba,kerbau,onta',
             'iuran_perorang' => 'required|numeric',
             'kriteria' => 'nullable',

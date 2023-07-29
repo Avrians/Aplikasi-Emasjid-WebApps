@@ -52,24 +52,35 @@ class KurbanHewanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KurbanHewan $kurbanHewan)
+    public function edit(KurbanHewan $kurbanhewan)
     {
-        //
+        $kurban = Kurban::UserMasjid()->where('id', request('kurban_id'))->firstOrFail();
+        $data['model'] = $kurbanhewan;
+        $data['route'] = ['kurbanhewan.update', $kurbanhewan->id];
+        $data['method'] = 'PUT';
+        $data['title'] = 'Ubah Informasi Hewan Kurban';
+        $data['kurban'] = $kurban;
+        return view('kurbanhewan.form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKurbanHewanRequest $request, KurbanHewan $kurbanHewan)
+    public function update(UpdateKurbanHewanRequest $request, KurbanHewan $kurbanhewan)
     {
-        //
+        $kurbanhewan->update($request->validated());
+        flash('Data berhasil diubah');
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(KurbanHewan $kurbanHewan)
+    public function destroy(KurbanHewan $kurbanhewan)
     {
-        //
+        $kurban = Kurban::UserMasjid()->where('id', request('kurban_id'))->firstOrFail();
+        $kurbanhewan->delete();
+        flash('Data sudah di hapus');
+        return back();
     }
 }
