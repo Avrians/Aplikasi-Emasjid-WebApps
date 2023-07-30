@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kurban;
+use App\Models\KurbanPeserta;
 use App\Http\Requests\StoreKurbanPesertaRequest;
 use App\Http\Requests\UpdateKurbanPesertaRequest;
-use App\Models\KurbanPeserta;
 
 class KurbanPesertaController extends Controller
 {
@@ -21,7 +22,13 @@ class KurbanPesertaController extends Controller
      */
     public function create()
     {
-        //
+        $kurban = Kurban::UserMasjid()->where('id', request('kurban_id'))->firstOrFail();
+        $data['model'] = new KurbanPeserta();
+        $data['route'] = 'kurbanpeserta.store';
+        $data['method'] = 'POST';
+        $data['title'] = 'Tambah Informasi Peserta Kurban';
+        $data['kurban'] = $kurban;
+        return view('kurbanpeserta.form', $data);
     }
 
     /**
