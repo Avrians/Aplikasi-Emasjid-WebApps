@@ -22,7 +22,12 @@ class KurbanPesertaController extends Controller
      */
     public function create()
     {
+        // kita lakukan validasi terlebih dahulu agar user tidak dapat merubah ID pada URL -> jadi apabila user mengganti ID pada URL yang bukan milik UserId itu sendiri akan muncul halaman "NotFound"
+        // caranya dengan kita lakukan Query berdasarkan UserMasjid
         $kurban = Kurban::UserMasjid()->where('id', request('kurban_id'))->firstOrFail();
+
+        // tampilkan hewan kurbannya -> ada relasi pada kurban ke hewankurban
+        $data['listKurbanHewan'] = $kurban->kurbanHewan->pluck('hewan', 'id');
         $data['model'] = new KurbanPeserta();
         $data['route'] = 'kurbanpeserta.store';
         $data['method'] = 'POST';
@@ -36,7 +41,8 @@ class KurbanPesertaController extends Controller
      */
     public function store(StoreKurbanPesertaRequest $request)
     {
-        //
+        $requestDataPeserta = $request->validated();
+        unset($requestDataPeserta['status_bayar']);
     }
 
     /**

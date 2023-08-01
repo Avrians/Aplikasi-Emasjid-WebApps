@@ -31,13 +31,18 @@
                     </div>
                     <div class="form-group mb-3">
                         {!! Form::label('nohp', 'No HP*') !!}
-                        {!! Form::text('nohp', null, ['class' => 'form-control']) !!}
+                        {!! Form::text('nohp', null, ['class' => 'form-control ']) !!}
                         <span class="text-danger">{{ $errors->first('nohp') }}</span>
                     </div>
                     <div class="form-group mb-3">
                         {!! Form::label('alamat', 'Alamat') !!}
                         {!! Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => 3]) !!}
                         <span class="text-danger">{{ $errors->first('alamat') }}</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        {!! Form::label('kurban_hewan_id', 'Pilih Hewan Kurban') !!}
+                        {!! Form::select('kurban_hewan_id', $listKurbanHewan, null, ['class' => 'form-control']) !!}
+                        <span class="text-danger">{{ $errors->first('kurban_hewan_id') }}</span>
                     </div>
                     {{-- jika user sudah melakukan pembayaran, maka otomatis akan masuk ke table kurbanPeserta --}}
                     <div class="form-group mb-3">
