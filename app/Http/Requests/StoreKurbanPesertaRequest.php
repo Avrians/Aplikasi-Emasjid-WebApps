@@ -31,13 +31,20 @@ class StoreKurbanPesertaRequest extends FormRequest
             'nama' => 'required',
             'nama_tampilan' => 'required',
             'nohp' => 'required',
-            // 'kurban_hewan_id' => 'required',
+            'kurban_hewan_id' => 'required',
             'alamat' => 'nullable',
             'status_bayar' => 'nullable',
-            // 'total_bayar' => 'nullable',
-            // 'tanggal_bayar' => 'nullable',
+            'total_bayar' => 'nullable',
+            'tanggal_bayar' => 'nullable',
         ];
     }
 
-
+    protected function prepareForValidation(): void
+    {
+        if ($this->total_bayar != "") {
+            $this->merge([
+                'total_bayar' => str_replace('.', '', $this->total_bayar),
+            ]);
+        }
+    }
 }

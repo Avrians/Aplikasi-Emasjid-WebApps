@@ -14,6 +14,12 @@ class KurbanHewan extends Model
 
     protected $guarded = [];
 
+    protected $appends = ['nama_full'];
+    public function getNamaFullAttribute()
+    {
+        return ucwords($this->hewan) . " - {$this->kriteria} - " . formatRupiah($this->iuran_perorang);
+    } 
+
     public function kurban() {
         return $this->belongsTo(Kurban::class);
     }
