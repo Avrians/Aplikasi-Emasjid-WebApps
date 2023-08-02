@@ -87,6 +87,8 @@
                                     <td>Nama</td>
                                     <td>Nomor HP</td>
                                     <td>Alamat</td>
+                                    <td>Jenis Hewan</td>
+                                    <td>Status</td>
                                     <td>Aksi</td>
                                 </tr>
                             </thead>
@@ -100,6 +102,18 @@
                                         </td>
                                         <td>{{ $item->peserta->nohp }}</td>
                                         <td>{{ $item->peserta->alamat }}</td>
+                                        <td>
+                                            {{ ucwords($item->kurbanHewan->hewan) }} -
+                                            {{ $item->kurbanHewan->kriteria }} -
+                                            {{ formatRupiah($item->kurbanHewan->iuran_perorang) }}
+                                        </td>
+                                        <td>
+                                            @if ($item->status_bayar == 'lunas')
+                                                <span class="badge bg-success me-1 my-1">LUNAS</span>
+                                            @else
+                                                <span class="badge bg-secondary me-1 my-1">BELUM LUNAS</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             {!! Form::open([
                                                 'method' => 'DELETE',

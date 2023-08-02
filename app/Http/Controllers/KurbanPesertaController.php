@@ -50,25 +50,27 @@ class KurbanPesertaController extends Controller
         $requestDataPeserta = $requestPeserta->validated();
         DB::beginTransaction();
         $peserta = Peserta::create($requestDataPeserta);
+        $statusBayar = "belum bayar";
         if ($requestKurbanPeserta->filled('status_bayar')) {
-            $requestKurbanPeserta = $requestKurbanPeserta->validated();
-            $kurbanHewan = KurbanHewan::userMasjid()->where('id', $requestKurbanPeserta['kurban_hewan_id'])->firstOrFail();
-            $requestKurbanPeserta['total_bayar'] = $requestKurbanPeserta['total_bayar'] ?? $kurbanHewan->iuran_perorang;
-            $dataKurbanPeserta = [
-                'kurban_id' => $kurbanHewan->kurban_id,
-                'kurban_hewan_id' => $kurbanHewan->id,
-                'peserta_id' => $peserta->id,
-                'total_bayar' => $requestKurbanPeserta['total_bayar'],
-                'tanggal_bayar' => $requestKurbanPeserta['tanggal_bayar'],
-                'status_bayar' => 'Lunas',
-                'metode_bayar' => 'Tunai',
-                'bukti_bayar' => 'OK',
-            ];
-            KurbanPeserta::create($dataKurbanPeserta);
-        };
+            $statusBayar = "lunas";
+        }
+        $requestKurbanPeserta = $requestKurbanPeserta->validated();
+        $kurbanHewan = KurbanHewan::userMasjid()->where('id', $requestKurbanPeserta['kurban_hewan_id'])->firstOrFail();
+        $requestKurbanPeserta['total_bayar'] = $requestKurbanPeserta['total_bayar'] ?? $kurbanHewan->iuran_perorang;
+        $dataKurbanPeserta = [
+            'kurban_id' => $kurbanHewan->kurban_id,
+            'kurban_hewan_id' => $kurbanHewan->id,
+            'peserta_id' => $peserta->id,
+            'total_bayar' => $requestKurbanPeserta['total_bayar'],
+            'tanggal_bayar' => $requestKurbanPeserta['tanggal_bayar'],
+            'status_bayar' => strtolower($statusBayar),
+            'metode_bayar' => 'Tunai',
+            'bukti_bayar' => 'OK',
+        ];
+        KurbanPeserta::create($dataKurbanPeserta);
         DB::commit();
         flash('Data berhasil disimpan')->success();
-        return back();  
+        return back();
     }
 
     /**
@@ -100,12 +102,12 @@ class KurbanPesertaController extends Controller
      */
     public function destroy(KurbanPeserta $kurbanpesertum)
     {
-        if($kurbanpesertum->status_bayar == 'Lunas'){
+        if ($kurbanpesertum->status_bayar == 'Lunas') {
             flash('Data tidak dapat dihapus karena sudah lunas')->error();
             return back();
         }
         $kurbanpesertum->delete();
         flash('Data berhasil dihapus')->success();
-        return back(); 
+        return back();
     }
 }
