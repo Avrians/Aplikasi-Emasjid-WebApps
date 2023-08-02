@@ -1,5 +1,20 @@
 @extends('layouts.main_admin')
 
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.pembayaran').hide();
+            $("#my-input").change(function(e) {
+                if ($(this).is(':checked')) {
+                    $('.pembayaran').show();
+                } else {
+                    $('.pembayaran').hide();
+                }
+            });
+        });
+    </script>
+@endsection
+
 @section('content')
     <h1 class="h3 mb-3">{{ $title }}</h1>
 
@@ -56,18 +71,25 @@
                         <span class="text-danger">{{ $errors->first('status_bayar') }}</span>
                     </div>
 
-                    {{-- kita tampilkan form Total Pembayarannya -> karena biasanya ada yang bayar lebih dari seharusnya --}}
-                    <div class="form-group mb-3">
-                        {!! Form::label('total_bayar', 'Total Pembayaran') !!}
-                        {!! Form::text('total_bayar', null, ['class' => 'form-control rupiah']) !!}
-                        <span class="text-danger">{{ $errors->first('total_bayar') }}</span>
-                    </div>
+                    <div class="pembayaran">
+                        <h3>Data Pembayaran</h3>
+                        <div class="alert alert-secondary" role="alert">
+                            Jika total bayar kosong, maka otomatis dari iuran perorang
+                        </div>
 
-                    {{-- kita tampilkan Tanggal Pembayaran --}}
-                    <div class="form-group mb-3">
-                        {!! Form::label('tanggal_bayar', 'Tanggal Pembayaran') !!}
-                        {!! Form::text('tanggal_bayar', $model->tanggal_bayar ?? now(), ['class' => 'form-control']) !!}
-                        <span class="text-danger">{{ $errors->first('tanggal_bayar') }}</span>
+                        {{-- kita tampilkan form Total Pembayarannya -> karena biasanya ada yang bayar lebih dari seharusnya --}}
+                        <div class="form-group mb-3">
+                            {!! Form::label('total_bayar', 'Total Pembayaran') !!}
+                            {!! Form::text('total_bayar', null, ['class' => 'form-control rupiah']) !!}
+                            <span class="text-danger">{{ $errors->first('total_bayar') }}</span>
+                        </div>
+
+                        {{-- kita tampilkan Tanggal Pembayaran --}}
+                        <div class="form-group mb-3">
+                            {!! Form::label('tanggal_bayar', 'Tanggal Pembayaran') !!}
+                            {!! Form::text('tanggal_bayar', $model->tanggal_bayar ?? now(), ['class' => 'form-control']) !!}
+                            <span class="text-danger">{{ $errors->first('tanggal_bayar') }}</span>
+                        </div>
                     </div>
 
                     <div class="form-group mb-3">

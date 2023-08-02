@@ -12,4 +12,9 @@ class KurbanPeserta extends Model
     use HasFactory;
     use HasCreatedBy, HasMasjid;
     protected $guarded = [];
+
+    public function peserta()
+    {
+        return $this->belongsTo(Peserta::class);
+    }
 }

@@ -84,10 +84,9 @@
                             <thead>
                                 <tr>
                                     <td width="1%">No</td>
-                                    <td>Hewan</td>
-                                    <td>Iuran</td>
-                                    <td>Harga</td>
-                                    <td>Biaya Operasional</td>
+                                    <td>Nama</td>
+                                    <td>Nomor HP</td>
+                                    <td>Alamat</td>
                                     <td>Aksi</td>
                                 </tr>
                             </thead>
@@ -95,10 +94,12 @@
                                 @foreach ($kurban->kurbanPeserta as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->hewan }}({{ $item->kriteria }})</td>
-                                        <td>{{ formatRupiah($item->iuran_perorang) }}</td>
-                                        <td>{{ formatRupiah($item->harga) }}</td>
-                                        <td>{{ formatRupiah($item->biaya_operasional) }}</td>
+                                        <td>
+                                            <div>{{ $item->peserta->nama }}</div>
+                                            <div>({{ $item->peserta->nama_tampilan }})</div>
+                                        </td>
+                                        <td>{{ $item->peserta->nohp }}</td>
+                                        <td>{{ $item->peserta->alamat }}</td>
                                         <td>
                                             {!! Form::open([
                                                 'method' => 'DELETE',

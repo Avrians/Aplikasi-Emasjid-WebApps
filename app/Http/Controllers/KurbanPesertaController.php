@@ -66,8 +66,9 @@ class KurbanPesertaController extends Controller
             ];
             KurbanPeserta::create($dataKurbanPeserta);
         };
-
         DB::commit();
+        flash('Data berhasil disimpan')->success();
+        return back();  
     }
 
     /**
@@ -97,8 +98,14 @@ class KurbanPesertaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(KurbanPeserta $kurbanPeserta)
+    public function destroy(KurbanPeserta $kurbanpesertum)
     {
-        //
+        if($kurbanpesertum->status_bayar == 'Lunas'){
+            flash('Data tidak dapat dihapus karena sudah lunas')->error();
+            return back();
+        }
+        $kurbanpesertum->delete();
+        flash('Data berhasil dihapus')->success();
+        return back(); 
     }
 }
