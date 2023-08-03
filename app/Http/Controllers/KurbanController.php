@@ -93,6 +93,14 @@ class KurbanController extends Controller
      */
     public function destroy(Kurban $kurban)
     {
+        if($kurban->kurbanHewan()->count() >= 1){
+            flash('Data tidak bisa dihapus karena sudah digunakan di tabel lain')->error();
+            return back();
+        }
+        if($kurban->kurbanPeserta()->count() >= 1){
+            flash('Data tidak bisa dihapus karena sudah digunakan di tabel lain')->error();
+            return back();
+        }
         $kurban->delete();
         flash('Data sudah di hapus');
         return back();
