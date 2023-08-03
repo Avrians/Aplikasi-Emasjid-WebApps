@@ -84,9 +84,21 @@ class KurbanPesertaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KurbanPeserta $kurbanPeserta)
+    public function edit(KurbanPeserta $kurbanpesertum)
     {
-        //
+        $kurbanpeserta = $kurbanpesertum;
+        // kita lakukan validasi terlebih dahulu agar user tidak dapat merubah ID pada URL -> jadi apabila user mengganti ID pada URL yang bukan milik UserId itu sendiri akan muncul halaman "NotFound"
+        // caranya dengan kita lakukan Query berdasarkan UserMasjid
+        $kurban = Kurban::UserMasjid()->where('id', request('kurban_id'))->firstOrFail();
+
+        // tampilkan hewan kurbannya -> ada relasi pada kurban ke hewankurban
+        $data['listKurbanHewan'] = $kurban->kurbanHewan->pluck('nama_full', 'id');
+        $data['model'] = $kurbanpeserta;
+        $data['route'] = ['kurbanpeserta.update', $kurbanpeserta->id];
+        $data['method'] = 'PUT';
+        $data['title'] = 'Pembayaran Kurban';
+        $data['kurban'] = $kurban;
+        return view('kurbanpeserta.edit', $data);
     }
 
     /**

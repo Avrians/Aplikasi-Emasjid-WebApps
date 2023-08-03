@@ -72,12 +72,12 @@
                     <h3>Data Peserta Kurban</h3>
                     @if ($kurban->kurbanPeserta->count() >= 1)
                         <a href="{{ route('kurbanpeserta.create', ['kurban_id' => $kurban->id]) }}"
-                            class="btn btn-primary">Buat Baru</a>
+                            class="btn btn-primary">Pendaftaran Baru</a>
                     @endif
 
                     @if ($kurban->kurbanPeserta->count() == 0)
                         <div class="text-center">Belum ada data.
-                            <a href="{{ route('kurbanpeserta.create', ['kurban_id' => $kurban->id]) }}">Buat Baru</a>
+                            <a href="{{ route('kurbanpeserta.create', ['kurban_id' => $kurban->id]) }}">Pendaftaran Baru</a>
                         </div>
                     @else
                         <table class="table table-striped">
@@ -123,7 +123,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <a href="{{ route('kurbanpeserta.edit', [$item->id, 'kurban_id' => $item->kurban_id]) }}"
-                                                class="btn btn-primary btn-sm mb-1 mx-1">Edit</a>
+                                                class="btn btn-primary btn-sm mb-1 mx-1">Pembayaran Iuran</a>
                                             <button type="submit" class="btn btn-danger btn-sm mb-1 mx-1"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                             {!! Form::close() !!}
