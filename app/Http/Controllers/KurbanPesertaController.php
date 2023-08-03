@@ -104,9 +104,19 @@ class KurbanPesertaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKurbanPesertaRequest $request, KurbanPeserta $kurbanPeserta)
+    public function update(UpdateKurbanPesertaRequest $request, $id)
     {
-        //
+        $model = KurbanPeserta::where('id', $id)->where('kurban_id', $request->kurban_id)->firstOrFail();
+        $iuranPerorangan = $model->kurbanHewan->iuran_perorang;
+        $totalBayar = $request->total_bayar;
+        if ($totalBayar < $iuranPerorangan) {
+            flash('Total bayar tidak boleh kurang dari iuran perorangan')->error();
+            return back();
+        }
+        $model->status_bayar = 'lunas'; 
+        $model->update($request->validated());
+        flash('Data berhasil diubah')->success();
+        return back();
     }
 
     /**

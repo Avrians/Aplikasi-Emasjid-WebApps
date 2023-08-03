@@ -7,9 +7,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                {{-- <h3 class="card-header">{{ isset($kases) ? 'Edit Kas' : 'Tambah Kas' }}</h3> --}}
-
                 <div class="card-body">
+                    <h4>Status Pembayaran : {{ $model->getStatusText() }}</h4>
                     <div class="alert alert-secondary" role="alert">
                         Tanda * wajib diisi
                     </div>
