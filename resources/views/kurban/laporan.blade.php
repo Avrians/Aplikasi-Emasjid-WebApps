@@ -85,6 +85,19 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="h4">
+                        Total Peserta: {{ $kurban->kurbanPeserta->count() }}
+                    </div>
+                    <div class="h4">
+                        Total Peserta Sudah Bayar: {{ $kurban->kurbanPeserta->where('status_bayar', 'lunas')->count() }}
+                    </div>
+                    <div class="h4">
+                        Total Iuran Peserta: {{ formatRupiah($kurban->kurbanPeserta->sum('total_bayar')) }}
+                    </div>
+                    <div class="h4">
+                        Total Sudah Bayar:
+                        {{ formatRupiah($kurban->kurbanPeserta->where('status_bayar', 'lunas')->sum('total_bayar')) }}
+                    </div>
                 </div>
             </div>
 
