@@ -1,7 +1,7 @@
-@extends('layouts.main_admin')
+@extends('layouts.laporan_admin')
 
 @section('content')
-    <h1 class="h3 mb-3">{{ $title }}</h1>
+    <h1 class="m-4 text-center">LAPORAN DATA KURBAN TAHUN Kurban {{ $kurban->tahun_hijriah }}H / {{ $kurban->tahun_masehi }}M</h1>
 
     <div class="row">
         <div class="col-md-12">
@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <h3>Tahun Kurban {{ $kurban->tahun_hijriah }}H / {{ $kurban->tahun_masehi }}</h3>
-                        <a href="{{ route('kurban.show',[$kurban->id, 'output' => 'laporan'])}}" target="blank"><i class="align-middle" data-feather="file-text"></i> Laporan Peserta Kurban</a>
+                        <a href="{{ route('kurban.show',$kurban->id)}}" target="blank"><i class="align-middle" data-feather="file-text"></i> Laporan Peserta Kurban</a>
                     </div>
                     <h6> <i class="align-middle" data-feather="calendar"></i> Tanggal Akhir Pendaftaran :
                         <b>{{ $kurban->tanggal_akhir_pendaftaran->format('d-m-Y') }}</b>

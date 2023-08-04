@@ -55,7 +55,9 @@ class KurbanController extends Controller
     {
         $data['kurban'] = $kurban;
         $data['title'] = 'Detail Masjid';
-        // dd($data);
+        if (request('output') == 'laporan') {
+            return view('kurban.laporan', $data);
+        }
         return view('kurban.show', $data);
     }
 
@@ -65,7 +67,7 @@ class KurbanController extends Controller
     public function edit(Kurban $kurban)
     {
         $data['model'] = $kurban;
-        $data['route'] = ['kurban.update', $kurban->id]; 
+        $data['route'] = ['kurban.update', $kurban->id];
         $data['method'] = 'PUT';
         $data['title'] = 'Edit Informasi Kurban ';
         return view('kurban.form', $data);
@@ -93,11 +95,11 @@ class KurbanController extends Controller
      */
     public function destroy(Kurban $kurban)
     {
-        if($kurban->kurbanHewan()->count() >= 1){
+        if ($kurban->kurbanHewan()->count() >= 1) {
             flash('Data tidak bisa dihapus karena sudah digunakan di tabel lain')->error();
             return back();
         }
-        if($kurban->kurbanPeserta()->count() >= 1){
+        if ($kurban->kurbanPeserta()->count() >= 1) {
             flash('Data tidak bisa dihapus karena sudah digunakan di tabel lain')->error();
             return back();
         }
