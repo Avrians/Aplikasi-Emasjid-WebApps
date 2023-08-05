@@ -21,11 +21,11 @@
                         <span class="text-danger">{{ $errors->first('tanggal') }}</span>
                     </div>
 
-                    <div class="form-group mb-3">
+                    {{-- <div class="form-group mb-3">
                         {!! Form::label('kategori', 'Kategori') !!}
                         {!! Form::text('kategori', null, ['class' => 'form-control']) !!}
                         <span class="text-danger">{{ $errors->first('kategori') }}</span>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group mb-3">
                         {!! Form::label('keterangan', 'Keterangan') !!}

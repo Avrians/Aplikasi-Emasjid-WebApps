@@ -17,18 +17,18 @@
                             <a href="{{ route('kas.create') }}" class="btn btn-primary">Tambah Kas</a>
                         </div>
                         <div class="bd-highlight mx-1">
-                            {!! Form::date('tanggal', request('tanggal'), [
+                            {!! Form::date('tanggal_mulai', request('tanggal_mulai'), [
                                 'class' => 'form-control',
                                 'placeholder' => 'Tanggal Mulai',
                             ]) !!}
                         </div>
                         <div class="bd-highlight mx-1">
-                            {!! Form::date('tanggal', request('tanggal'), [
+                            {!! Form::date('tanggal_selesai', request('tanggal_selesai'), [
                                 'class' => 'form-control',
                                 'placeholder' => 'Tanggal Selesai',
                             ]) !!}
                         </div>
-                        <div class="bd-highlight">
+                        <div class="bd-highlight me-1">
                             {!! Form::text('q', request('q'), ['class' => 'form-control', 'placeholder' => 'Keterangan Transaksi']) !!}
                         </div>
                         <div lass="bd-highlight">
@@ -44,7 +44,6 @@
                                     <th>No.</th>
                                     <th>Tanggal</th>
                                     <th>Diinput Oleh</th>
-                                    <th>Kategori</th>
                                     <th>Keterangan</th>
                                     <th class="text-end">Pemasukan</th>
                                     <th class="text-end">Pengeluaran</th>
@@ -57,7 +56,6 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $kas->tanggal->translatedFormat('d-m-Y') }}</td>
                                         <td>{{ $kas->createdBy->name }}</td>
-                                        <td>{{ $kas->kategori ?? 'umum' }}</td>
                                         <td>{{ $kas->keterangan }}</td>
                                         <td class="text-end">
                                             {{ $kas->jenis == 'masuk' ? formatRupiah($kas->jumlah, true) : '-' }}
