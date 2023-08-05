@@ -9,27 +9,34 @@
             <div class="card">
                 <div class="card-body">
                     {!! Form::open([
-                         'url' => url()->current(),
-                         'method' => 'GET',
-                         'class' => 'row row-cols-lg-auto align-items-center'
+                        'url' => url()->current(),
+                        'method' => 'GET',
                     ]) !!}
-                        <div class="col-auto">
+                    <div class="d-flex bd-highlight mb-3">
+                        <div class="me-auto bd-highlight">
                             <a href="{{ route('kas.create') }}" class="btn btn-primary">Tambah Kas</a>
                         </div>
-                        <div class="col-auto ms-auto">
-                          <label for="inlineFormInputGroupUsername">Tanggal Transaksi</label>
-                          {!! Form::date('tanggal', request('tanggal'), ['class' => 'form-control']) !!}
+                        <div class="bd-highlight mx-1">
+                            {!! Form::date('tanggal', request('tanggal'), [
+                                'class' => 'form-control',
+                                'placeholder' => 'Tanggal Mulai',
+                            ]) !!}
                         </div>
-                      
-                        <div class="col-auto">
-                          <label for="inlineFormSelectPref">Keterangan Transaksi</label>
-                          {!! Form::text('q', request('q'), ['class' => 'form-control', 'placeholder' => 'Keterangan Transaksi']) !!}
+                        <div class="bd-highlight mx-1">
+                            {!! Form::date('tanggal', request('tanggal'), [
+                                'class' => 'form-control',
+                                'placeholder' => 'Tanggal Selesai',
+                            ]) !!}
                         </div>
-                      
-                        <div class="col-auto mt-3">
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="bd-highlight">
+                            {!! Form::text('q', request('q'), ['class' => 'form-control', 'placeholder' => 'Keterangan Transaksi']) !!}
                         </div>
-                      {!! Form::close() !!}
+                        <div lass="bd-highlight">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    {!! Form::close() !!}
                     <div class="table-responsive mt-3">
                         <table class="{{ config('app.table_style') }}">
                             <thead>
@@ -78,7 +85,7 @@
                                 <tr>
                                     <td colspan="5" class="text-center fw-bold">TOTAL</td>
                                     <td class="text-end">{{ formatRupiah($totalPemasukan, true) }}</td>
-                                    <td class="text-end"  >{{ formatRupiah($totalPengeluaran, true) }}</td>
+                                    <td class="text-end">{{ formatRupiah($totalPengeluaran, true) }}</td>
                                 </tr>
                             </tfoot>
                         </table>
