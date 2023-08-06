@@ -105,7 +105,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="5" class="text-center fw-bold">TOTAL</td>
+                                    <td colspan="4" class="text-center fw-bold">TOTAL</td>
                                     <td class="text-end">{{ formatRupiah($totalPemasukan, true) }}</td>
                                     <td class="text-end">{{ formatRupiah($totalPengeluaran, true) }}</td>
                                 </tr>

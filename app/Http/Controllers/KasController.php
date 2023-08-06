@@ -20,12 +20,16 @@ class KasController extends Controller
         if ($request->filled('tanggal_selesai')) {
             $query = $query->where('tanggal', '<=', $request->tanggal_selesai);
         }
-
+        
         $kases = $query->latest()->paginate(50);
-        $saldoAkhir = Kas::SaldoAkhir();
         $title = "Kas Masjid";
         $totalPemasukan = $kases->where('jenis', 'masuk')->sum('jumlah');
         $totalPengeluaran = $kases->where('jenis', 'keluar')->sum('jumlah');
+        $saldoAkhir = Kas::SaldoAkhir();
+        if($request->page == 'laporan') {
+            return view('kas.laporan', compact('kases', 'saldoAkhir', 'totalPemasukan', 'totalPengeluaran', 'title'));
+        }
+
         return view('kas.index', compact('kases', 'saldoAkhir', 'totalPemasukan', 'totalPengeluaran', 'title'));
     }
 
