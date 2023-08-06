@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InfaqController;
 use App\Http\Controllers\InformasiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('masjid', MasjidController::class);
 
     Route::middleware(EnsureDataMasjidCompleted::class)->group(function () {
+        Route::resource('infaq', InfaqController::class);
         Route::resource('kurbanpeserta', KurbanPesertaController::class);
         Route::resource('peserta', PesertaController::class);
         Route::resource('kurbanhewan', KurbanHewanController::class);
