@@ -48,6 +48,11 @@
                                 Masjid</span>
                         </a>
                     </li>
+                    <li class="sidebar-item {{ Route::is('infaq.*') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('infaq.index') }}">
+                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Infaq</span>
+                        </a>
+                    </li>
                     <li class="sidebar-item {{ Route::is('kas.*') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('kas.index') }}">
                             <i class="align-middle" data-feather="book"></i> <span class="align-middle">Kas
@@ -77,9 +82,11 @@
                             <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Bank</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ Route::is('kurban.*') ? 'active' : '' }} {{ Route::is('kurbanhewan.*') ? 'active' : '' }}">
+                    <li
+                        class="sidebar-item {{ Route::is('kurban.*') ? 'active' : '' }} {{ Route::is('kurbanhewan.*') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('kurban.index') }}">
-                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Kurban</span>
+                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data
+                                Kurban</span>
                         </a>
                     </li>
                 </ul>

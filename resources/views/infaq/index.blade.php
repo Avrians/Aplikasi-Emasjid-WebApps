@@ -1,14 +1,13 @@
 @extends('layouts.main_admin')
 @section('js')
     <script>
-        $(document).ready(function() {
-            $("#cetak").click(function(e) {
+        $(document).ready(function () {
+            $("#cetak").click(function (e) { 
                 var tanggalMulai = $("#tanggal_mulai").val();
                 var tanggalSelesai = $("#tanggal_selesai").val();
                 var q = $("#q").val();
-                params = "?page=laporan&tanggal_mulai=" + tanggalMulai + "&tanggal_selesai=" +
-                    tanggalSelesai + "&q=" + q;
-                window.open("{{ route('kas.index') }}" + params, '_blank');
+                params = "?page=laporan&tanggal_mulai="+tanggalMulai+"&tanggal_selesai="+tanggalSelesai+"&q="+q;
+                window.open("{{ route('kas.index') }}"+params, '_blank');
             });
         });
     </script>
@@ -30,7 +29,7 @@
                     ]) !!}
                     <div class="d-flex bd-highlight mb-3 align-items-center">
                         <div class="me-auto bd-highlight">
-                            <a href="{{ route('kas.create') }}" class="btn btn-primary">Tambah Data Kas</a>
+                            <a href="{{ route('infaq.create') }}" class="btn btn-primary">Tambah Data</a>
                         </div>
                         <div class="bd-highlight mx-1">
                             {!! Form::label('tm', 'Tanggal Mulai', []) !!}
@@ -45,22 +44,22 @@
                             {!! Form::date('tanggal_selesai', request('tanggal_selesai'), [
                                 'class' => 'form-control',
                                 'placeholder' => 'Tanggal Selesai',
-                                'id' => 'tanggal_selesai',
+                                'id' => 'tanggal_selesai', 
                             ]) !!}
                         </div>
                         <div class="bd-highlight me-1">
                             {!! Form::label('k', 'Keterangan', []) !!}
                             {!! Form::text('q', request('q'), [
-                                'class' => 'form-control',
+                                'class' => 'form-control', 
                                 'placeholder' => 'Keterangan Transaksi',
                                 'id' => 'q',
-                            ]) !!}
+                                ]) !!}
                         </div>
                         <div lass="bd-highlight">
                             <button type="submit" class="btn btn-primary mt-3"
                                 style="margin-top: 20px !important;">Cari</button>
                             <button type="button" target="blank" class="btn btn-primary mt-3"
-                                style="margin-top: 20px !important;" id="cetak">Cetak Laporan</button>
+                                style="margin-top: 20px !important;" id ="cetak">Cetak Laporan</button>
                         </div>
                     </div>
 
@@ -79,26 +78,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kases as $key => $kas)
+                                @foreach ($query as $key => $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kas->tanggal->translatedFormat('d-m-Y') }}</td>
-                                        <td>{{ $kas->createdBy->name }}</td>
-                                        <td>{{ $kas->keterangan }}</td>
+                                        <td>{{ $data->created_At->translatedFormat('d-m-Y') }}</td>
+                                        <td>{{ $data->createdBy->name }}</td>
+                                        <td>{{ $data->atas_nama }}</td>
                                         <td class="text-end">
-                                            {{ $kas->jenis == 'masuk' ? formatRupiah($kas->jumlah, true) : '-' }}
+                                            {{ $data->jenis == 'masuk' ? formatRupiah($data->jumlah, true) : '-' }}
                                         </td>
                                         <td class="text-end">
-                                            {{ $kas->jenis == 'keluar' ? formatRupiah($kas->jumlah, true) : '-' }}
+                                            {{ $data->jenis == 'keluar' ? formatRupiah($data->jumlah, true) : '-' }}
                                         </td>
                                         <td>
                                             {!! Form::open([
                                                 'method' => 'DELETE',
-                                                'route' => ['kas.destroy', $kas->id],
+                                                'route' => ['infaq.destroy', $kas->id],
                                                 'style' => 'display:inline',
                                             ]) !!}
                                             @csrf
-                                            <a href="{{ route('kas.edit', $kas->id) }}"
+                                            <a href="{{ route('infaq.edit', $kas->id) }}"
                                                 class="btn btn-primary btn-sm mb-1 mx-1">Edit</a>
                                             <button type="submit" class="btn btn-danger btn-sm mb-1 mx-1"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
@@ -107,18 +106,9 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="4" class="text-center fw-bold">TOTAL</td>
-                                    <td class="text-end">{{ formatRupiah($totalPemasukan, true) }}</td>
-                                    <td class="text-end">{{ formatRupiah($totalPengeluaran, true) }}</td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
-
-                    <h4>Saldo Akhir Rp. {{ formatRupiah($saldoAkhir) }}</h4>
-                    {{ $kases->links() }}
+                    {{ $query->links() }}
                 </div>
             </div>
 

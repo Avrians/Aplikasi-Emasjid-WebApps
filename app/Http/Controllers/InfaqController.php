@@ -2,18 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Infaq;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreInfaqRequest;
 use App\Http\Requests\UpdateInfaqRequest;
-use App\Models\Infaq;
 
 class InfaqController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Infaq::UserMasjid();
+        if ($request->filled('atas_nama')) {
+            $query = $query->where('atas_nama', 'LIKE', '%' . $request->atas_nama . '%');
+        }
+        if ($request->filled('created_at')) {
+            $query = $query->where('created_at', '>=', $request->created_at);
+        }
+        if ($request->filled('tanggal_selesai')) {
+            $query = $query->where('tanggal', '<=', $request->tanggal_selesai);
+        }
+        
+        $query = $query->latest()->paginate(50);
+        $title = "Infaq Masjid";
+        if($request->page == 'laporan') {
+            // return view('kas.laporan', compact('kases', 'saldoAkhir', 'totalPemasukan', 'totalPengeluaran', 'title'));
+        }
+
+        return view('infaq.index', compact('query', 'title'));
     }
 
     /**
