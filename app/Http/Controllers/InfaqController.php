@@ -36,10 +36,10 @@ class InfaqController extends Controller
     public function listSumberDana()
     {
     return[
+        'kotak-amal-jumat' => 'Kotak amal jumat',
         'instansi' => 'Instansi',
         'perorang' => 'Perorangan / Pribadi',
-        'kotak-amal' => 'Kotak amal jumat',
-        'lainnya' => 'Lainnya'
+        'lainnya' => 'Lainnya', 
     ];
     }
 
@@ -48,9 +48,9 @@ class InfaqController extends Controller
      */
     public function create()
     {
-        $query = new Infaq();
-        $listSumberDana = $this->listSumberDana();
-        return view('infaq.form', compact('query', 'listSumberDana'));
+        $data['query'] = new Infaq();
+        $data['listSumberDana'] = $this->listSumberDana();
+        return view('infaq.form', $data);
     }
 
     /**
@@ -58,7 +58,8 @@ class InfaqController extends Controller
      */
     public function store(StoreInfaqRequest $request)
     {
-        //
+        $requestData = $request->validated();
+        dd($requestData);
     }
 
     /**
