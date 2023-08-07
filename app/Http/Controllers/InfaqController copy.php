@@ -33,15 +33,6 @@ class InfaqController extends Controller
 
         return view('infaq.index', compact('query', 'title'));
     }
-    public function listSumberDana()
-    {
-    return[
-        'instansi' => 'Instansi',
-        'perorang' => 'Perorangan / Pribadi',
-        'kotak-amal' => 'Kotak amal jumat',
-        'lainnya' => 'Lainnya'
-    ];
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -49,8 +40,7 @@ class InfaqController extends Controller
     public function create()
     {
         $query = new Infaq();
-        $listSumberDana = $this->listSumberDana();
-        return view('infaq.form', compact('query', 'listSumberDana'));
+        return view('infaq.form', compact('query'));
     }
 
     /**
