@@ -68,6 +68,7 @@ class InfaqController extends Controller
         // jika kas berjenis uang maka akan disimpan ke dalam kas masjid
         if ($infaq->jenis == 'uang') {
             $kas = new Kas();
+            $kas->infaq_id = $infaq->id;
             $kas->masjid_id = $infaq->masjid_id;
             $kas->tanggal = $infaq->created_at;
             $kas->kategori = 'infaq-' . $infaq->sumber;
@@ -115,6 +116,11 @@ class InfaqController extends Controller
      */
     public function destroy(Infaq $infaq)
     {
-        //
+        if ($infaq->kas != null) {
+            $infaq->kas->delete();
+        }
+        $infaq->delete();
+        flash('Data infaq berhasil dihapus')->success();
+        return back();
     }
 }

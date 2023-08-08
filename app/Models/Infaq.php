@@ -13,4 +13,9 @@ class Infaq extends Model
     use HasCreatedBy, HasMasjid;
 
     protected $guarded = [];
+
+    public function kas()
+    {
+        return $this->hasOne(Kas::class);
+    }
 }
