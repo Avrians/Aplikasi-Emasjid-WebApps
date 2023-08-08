@@ -108,7 +108,15 @@ class InfaqController extends Controller
      */
     public function update(UpdateInfaqRequest $request, Infaq $infaq)
     {
-        //
+        $requestData = $request->validated();
+        DB::beginTransaction();
+        $infaq->update($requestData);
+        $kas = $infaq->kas;
+        $kas->jumlah = $infaq->jumlah;
+        $kas->save();
+        DB::commit();
+        flash('Data infaq berhasil diubah')->success();
+        return back();
     }
 
     /**

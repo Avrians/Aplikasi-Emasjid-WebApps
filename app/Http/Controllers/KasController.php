@@ -118,6 +118,12 @@ class KasController extends Controller
     public function destroy(Kas $ka)
     {
         $kas =  $ka;
+
+        if ($kas->infaq_id != null) {
+            flash('Data kas gagal dihapus. Data kas ini terhubung dengan data infaq, silahkan hapus data melalui menu Data infaq')->error();
+            return back();
+        }
+
         $saldoAkhir = Kas::SaldoAkhir();
         if ($kas->jenis == 'masuk') {
             $saldoAkhir -= $kas->jumlah;
