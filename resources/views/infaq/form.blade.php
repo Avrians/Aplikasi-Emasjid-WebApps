@@ -36,7 +36,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::label('atas_nama', 'Keterangan - boleh dikosongkan') !!}
-                        {!! Form::textarea('atas_nama', null, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
+                        {!! Form::textarea('atas_nama', null, ['class' => 'form-control', 'rows' => 2]) !!}
                         <span class="text-danger">{{ $errors->first('atas_nama') }}</span>
                     </div>
 
@@ -53,7 +53,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::submit(isset($kas) ? 'Update' : 'Simpan', ['class' => 'btn btn-primary']) !!}
-                        <a href="{{ route('kas.index') }}" class="btn btn-secondary">Batal</a>
+                        <a href="{{ route('infaq.index') }}" class="btn btn-secondary">Batal</a>
                     </div>
 
                     {!! Form::close() !!}

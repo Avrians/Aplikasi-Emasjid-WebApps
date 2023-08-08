@@ -25,6 +25,7 @@ class StoreInfaqRequest extends FormRequest
             'sumber' => 'required',
             'atas_nama' => 'nullable',
             'jenis' => 'required',
+            'satuan' => 'required',
             'jumlah' => 'required',
         ];
     }

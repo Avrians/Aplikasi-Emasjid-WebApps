@@ -35,10 +35,7 @@ class KasController extends Controller
 
     public function create()
     {
-        $kas = new Kas();
-        $saldoAkhir = Kas::SaldoAkhir();
-        $disable = [];
-        return view('kas.form', compact('kas', 'saldoAkhir', 'disable'));
+ 
     }
 
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Models\Kas;
 use App\Models\Infaq;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreInfaqRequest;
@@ -35,12 +37,12 @@ class InfaqController extends Controller
     }
     public function listSumberDana()
     {
-    return[
-        'kotak-amal-jumat' => 'Kotak amal jumat',
-        'instansi' => 'Instansi',
-        'perorang' => 'Perorangan / Pribadi',
-        'lainnya' => 'Lainnya', 
-    ];
+        return [
+            'kotak-amal-jumat' => 'Kotak amal jumat',
+            'instansi' => 'Instansi',
+            'perorang' => 'Perorangan / Pribadi',
+            'lainnya' => 'Lainnya',
+        ];
     }
 
     /**
@@ -59,7 +61,27 @@ class InfaqController extends Controller
     public function store(StoreInfaqRequest $request)
     {
         $requestData = $request->validated();
-        dd($requestData);
+        DB::beginTransaction();
+        $requestData['atas_nama'] = $requestData['atas_nama'] ?? 'Hamba Allah';
+        $infaq = Infaq::create($requestData);
+
+        // jika kas berjenis uang maka akan disimpan ke dalam kas masjid
+        if ($infaq->jenis == 'uang') {
+            $kas = new Kas();
+            $kas->masjid_id = $infaq->masjid_id;
+            $kas->tanggal = $infaq->created_at;
+            $kas->kategori = 'infaq-' . $infaq->sumber;
+            $kas->keterangan = 'Infaq ' . $infaq->sumber . ' dari ' . $infaq->atas_nama;
+            $kas->jenis = 'masuk';
+            $kas->jumlah = $infaq->jumlah;
+            $kas->save();
+        }
+
+
+        DB::commit();
+
+        flash('Data infaq berhasil ditambahkan dan tersimpan di kas masjid.')->success();
+        return back();
     }
 
     /**
