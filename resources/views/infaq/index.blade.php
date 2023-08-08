@@ -89,7 +89,11 @@
                                         <td>{{ $data->jenis }}</td>
                                         <td>{{ $data->atas_nama }}</td>
                                         <td class="text-end">
-                                            {{ formatRupiah($data->jumlah) }}
+                                            @if ($data->jenis == 'uang')
+                                                {{ formatRupiah($data->jumlah, true) }}
+                                            @else
+                                                {{ $data->jumlah }} {{ $data->satuan }}
+                                            @endif
                                         </td>
                                         <td>
                                             {!! Form::open([

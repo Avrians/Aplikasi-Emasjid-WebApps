@@ -97,7 +97,9 @@ class InfaqController extends Controller
      */
     public function edit(Infaq $infaq)
     {
-        //
+        $data['query'] = Infaq::UserMasjid()->findOrFail($infaq->id);
+        $data['listSumberDana'] = $this->listSumberDana();
+        return view('infaq.form', $data);
     }
 
     /**

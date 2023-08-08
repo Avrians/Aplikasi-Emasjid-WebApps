@@ -23,12 +23,17 @@
                     <div class="form-group mb-3">
                         {!! Form::label('jenis', 'Sumber Infaq') !!}
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="jenis" id="uang" value="uang"
-                                checked>
+                            {!! Form::radio('jenis', 'uang', $query->jenis != null ? null : true, [
+                                'class' => 'form-check-input',
+                                'id' => 'uang',
+                            ]) !!}
                             <label class="form-check-label" for="uang">Uang Tunai</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="jenis" id="barang" value="barang">
+                            {!! Form::radio('jenis', 'barang', null, [
+                                'class' => 'form-check-input',
+                                'id' => 'barang',
+                            ]) !!}
                             <label class="form-check-label" for="barang">Barang</label>
                         </div>
                         <span class="text-danger">{{ $errors->first('jenis') }}</span>
