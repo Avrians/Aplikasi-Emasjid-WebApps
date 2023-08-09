@@ -17,14 +17,15 @@ class InfaqController extends Controller
     public function index(Request $request)
     {
         $query = Infaq::UserMasjid();
-        if ($request->filled('atas_nama')) {
-            $query = $query->where('atas_nama', 'LIKE', '%' . $request->atas_nama . '%');
+        if ($request->filled('q')) {
+            $query = $query->where('atas_nama', 'LIKE', '%' . $request->q . '%')
+            ->orWhere('sumber', 'LIKE', '%' . $request->q . '%');
         }
-        if ($request->filled('created_at')) {
-            $query = $query->where('created_at', '>=', $request->created_at);
+        if ($request->filled('tanggal_mulai')) {
+            $query = $query->where('created_at', '>=', $request->tanggal_mulai);
         }
         if ($request->filled('tanggal_selesai')) {
-            $query = $query->where('tanggal', '<=', $request->tanggal_selesai);
+            $query = $query->where('created_at', '<=', $request->tanggal_selesai);
         }
 
         $query = $query->latest()->paginate(50);

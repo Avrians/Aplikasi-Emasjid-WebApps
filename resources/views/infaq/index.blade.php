@@ -52,7 +52,7 @@
                             {!! Form::label('k', 'Keterangan', []) !!}
                             {!! Form::text('q', request('q'), [
                                 'class' => 'form-control',
-                                'placeholder' => 'Keterangan Transaksi',
+                                'placeholder' => 'Sumber / Keterangan',
                                 'id' => 'q',
                             ]) !!}
                         </div>

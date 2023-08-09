@@ -40,12 +40,6 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        {!! Form::label('atas_nama', 'Keterangan - boleh dikosongkan') !!}
-                        {!! Form::textarea('atas_nama', null, ['class' => 'form-control', 'rows' => 2]) !!}
-                        <span class="text-danger">{{ $errors->first('atas_nama') }}</span>
-                    </div>
-
-                    <div class="form-group mb-3">
                         {!! Form::label('jumlah', 'Jumlah Infaq') !!}
                         {!! Form::text('jumlah', null, ['class' => 'form-control rupiah', 'required']) !!}
                         <span class="text-danger">{{ $errors->first('jumlah') }}</span>
@@ -54,6 +48,12 @@
                         {!! Form::label('satuan', 'Satuan Infaq - Misalnya: kg, rupiah, sak, pcs') !!}
                         {!! Form::text('satuan', $query->satuan ?? 'rupiah', ['class' => 'form-control']) !!}
                         <span class="text-danger">{{ $errors->first('satuan') }}</span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {!! Form::label('atas_nama', 'Keterangan - boleh dikosongkan') !!}
+                        {!! Form::textarea('atas_nama', null, ['class' => 'form-control', 'rows' => 2]) !!}
+                        <span class="text-danger">{{ $errors->first('atas_nama') }}</span>
                     </div>
 
                     <div class="form-group mb-3">
