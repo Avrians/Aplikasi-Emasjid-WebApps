@@ -19,7 +19,7 @@ class InfaqController extends Controller
         $query = Infaq::UserMasjid();
         if ($request->filled('q')) {
             $query = $query->where('atas_nama', 'LIKE', '%' . $request->q . '%')
-            ->orWhere('sumber', 'LIKE', '%' . $request->q . '%');
+                ->orWhere('sumber', 'LIKE', '%' . $request->q . '%');
         }
         if ($request->filled('tanggal_mulai')) {
             $query = $query->where('created_at', '>=', $request->tanggal_mulai);
@@ -77,6 +77,7 @@ class InfaqController extends Controller
             $kas->jenis = 'masuk';
             $kas->jumlah = $infaq->jumlah;
             $kas->save();
+            $kas->masjid->update(['saldo_akhir' => Kas::SaldoAkhir() + $kas->jumlah]);
         }
 
 

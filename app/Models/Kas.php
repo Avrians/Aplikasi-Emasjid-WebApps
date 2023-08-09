@@ -11,7 +11,7 @@ use phpDocumentor\Reflection\Types\Null_;
 class Kas extends Model
 {
     use HasFactory;
-    use HasCreatedBy, HasMasjid; 
+    use HasCreatedBy, HasMasjid;
 
     protected $table = "kas";
     protected $fillable = [
@@ -34,5 +34,28 @@ class Kas extends Model
         $masjidId = $masjidId ?? auth()->user()->masjid_id;
         $masjid = Masjid::where('id', $masjidId)->first();
         return $masjid->saldo_akhir ?? 0;
+    }
+
+    protected static function booted(): void
+    {
+        static::created(function (Kas $kas) {
+            $saldoAkhir = Kas::SaldoAkhir();
+            if ($kas->jenis == 'masuk') {
+                $saldoAkhir += $kas->jumlah;
+            } else {
+                $saldoAkhir -= $kas->jumlah;
+            }
+            $kas->masjid->update(['saldo_akhir' => $saldoAkhir]);
+        });
+
+        static::deleted(function (Kas $kas) {
+            $saldoAkhir = Kas::SaldoAkhir();
+            if ($kas->jenis == 'masuk') {
+                $saldoAkhir -= $kas->jumlah;
+            } else {
+                $saldoAkhir += $kas->jumlah;
+            }
+            $kas->masjid->update(['saldo_akhir' => $saldoAkhir]);
+        });
     }
 }

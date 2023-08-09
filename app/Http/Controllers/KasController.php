@@ -20,13 +20,13 @@ class KasController extends Controller
         if ($request->filled('tanggal_selesai')) {
             $query = $query->where('tanggal', '<=', $request->tanggal_selesai);
         }
-        
+
         $kases = $query->latest()->paginate(50);
         $title = "Kas Masjid";
         $totalPemasukan = $kases->where('jenis', 'masuk')->sum('jumlah');
         $totalPengeluaran = $kases->where('jenis', 'keluar')->sum('jumlah');
         $saldoAkhir = Kas::SaldoAkhir();
-        if($request->page == 'laporan') {
+        if ($request->page == 'laporan') {
             return view('kas.laporan', compact('kases', 'saldoAkhir', 'totalPemasukan', 'totalPengeluaran', 'title'));
         }
 
@@ -35,7 +35,10 @@ class KasController extends Controller
 
     public function create()
     {
- 
+        $kas = new Kas();
+        $saldoAkhir = Kas::SaldoAkhir();
+        $disable = [];
+        return view('kas.form', compact('kas', 'saldoAkhir', 'disable'));
     }
 
 
@@ -57,23 +60,10 @@ class KasController extends Controller
         }
 
         $validatedData['jumlah'] = str_replace('.', '', $validatedData['jumlah']);
-        $saldoAkhir = Kas::SaldoAkhir();
 
-        // saldo akhir ditambah dengan jumlah transaksi masuk/ keluar
-        if ($validatedData['jenis'] == 'masuk') {
-            $saldoAkhir += $validatedData['jumlah'];
-        } else {
-            $saldoAkhir -= $validatedData['jumlah'];
-        };
-
-        if ($saldoAkhir < 0) {
-            flash('Data kas gagal di tambhakan, saldo akhir di kurang transaksi tidak boleh dari 0')->error();
-            return back();
-        }
         $kas = new Kas();
         $kas->fill($validatedData);
         $kas->save();
-        auth()->user()->masjid->update(['saldo_akhir' => $saldoAkhir]);
 
         flash('Data kas berhasil ditambahkan.')->success();
         return redirect()->route('kas.index')->with('success', 'Data kas berhasil ditambahkan.');
