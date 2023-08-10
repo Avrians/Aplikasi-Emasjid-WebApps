@@ -35,39 +35,4 @@ class Kas extends Model
         $masjid = Masjid::where('id', $masjidId)->first();
         return $masjid->saldo_akhir ?? 0;
     }
-
-    protected static function booted(): void
-    {
-        static::created(function (Kas $kas) {
-            $saldoAkhir = Kas::SaldoAkhir();
-            if ($kas->jenis == 'masuk') {
-                $saldoAkhir += $kas->jumlah;
-            } else {
-                $saldoAkhir -= $kas->jumlah;
-            }
-            $kas->masjid->update(['saldo_akhir' => $saldoAkhir]);
-        });
-
-        static::deleted(function (Kas $kas) {
-            $saldoAkhir = Kas::SaldoAkhir();
-            if ($kas->jenis == 'masuk') {
-                $saldoAkhir -= $kas->jumlah;
-            } else {
-                $saldoAkhir += $kas->jumlah;
-            }
-            $kas->masjid->update(['saldo_akhir' => $saldoAkhir]);
-        });
-
-        static::updated(function (Kas $kas) {
-            $saldoAkhir = Kas::SaldoAkhir();
-            if ($kas->jenis == 'masuk') {
-                $saldoAkhir -= $kas->getOriginal('jumlah');
-                $saldoAkhir += $kas->jumlah;
-            } else {
-                $saldoAkhir += $kas->getOriginal('jumlah');
-                $saldoAkhir -= $kas->jumlah;
-            }
-            $kas->masjid->update(['saldo_akhir' => $saldoAkhir]);
-        });
-    }
 }
