@@ -77,7 +77,6 @@ class InfaqController extends Controller
             $kas->jenis = 'masuk';
             $kas->jumlah = $infaq->jumlah;
             $kas->save();
-            $kas->masjid->update(['saldo_akhir' => Kas::SaldoAkhir() + $kas->jumlah]);
         }
 
 

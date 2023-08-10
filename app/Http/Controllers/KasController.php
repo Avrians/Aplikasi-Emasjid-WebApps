@@ -85,20 +85,10 @@ class KasController extends Controller
             'jumlah' => 'required',
         ]);
         $jumlah = str_replace('.', '', $validatedData['jumlah']);
-        $saldoAkhir = Kas::SaldoAkhir();
         $kas =  $ka;
-        if ($kas->jenis == 'masuk') {
-            $saldoAkhir -= $kas->jumlah;
-        }
-        if ($kas->jenis == 'keluar') {
-            $saldoAkhir += $kas->jumlah;
-        }
-        $saldoAkhir = $saldoAkhir + $jumlah;
         $validatedData['jumlah'] = $jumlah;
         $kas->fill($validatedData);
         $kas->save();
-        auth()->user()->masjid->update(['saldo_akhir' => $saldoAkhir]);
-
 
         flash('Data kas berhasil diperbaharui.')->success();
         return redirect()->route('kas.index');
@@ -114,15 +104,7 @@ class KasController extends Controller
             return back();
         }
 
-        $saldoAkhir = Kas::SaldoAkhir();
-        if ($kas->jenis == 'masuk') {
-            $saldoAkhir -= $kas->jumlah;
-        }
-        if ($kas->jenis == 'keluar') {
-            $saldoAkhir += $kas->jumlah;
-        }
         $kas->delete();
-        auth()->user()->masjid->update(['saldo_akhir' => $saldoAkhir]);
         flash('Data sudah disimpan');
         return redirect()->route('kas.index');
     }

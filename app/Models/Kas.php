@@ -57,5 +57,17 @@ class Kas extends Model
             }
             $kas->masjid->update(['saldo_akhir' => $saldoAkhir]);
         });
+
+        static::updated(function (Kas $kas) {
+            $saldoAkhir = Kas::SaldoAkhir();
+            if ($kas->jenis == 'masuk') {
+                $saldoAkhir -= $kas->getOriginal('jumlah');
+                $saldoAkhir += $kas->jumlah;
+            } else {
+                $saldoAkhir += $kas->getOriginal('jumlah');
+                $saldoAkhir -= $kas->jumlah;
+            }
+            $kas->masjid->update(['saldo_akhir' => $saldoAkhir]);
+        });
     }
 }
