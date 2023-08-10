@@ -76,7 +76,7 @@
                 <div class="card flex-fill w-100">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
-                            Recent Movement
+                            Grafik infaq bulanan
                         </h5>
                     </div>
                     <div class="card-body py-3">
@@ -93,146 +93,49 @@
                 <div class="card flex-fill">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
-                            Latest Projects
+                            Transaksi Kas Terbaru
                         </h5>
                     </div>
                     <table class="table table-hover my-0">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>No</th>
+                                <th>Keterangan</th>
                                 <th class="d-none d-xl-table-cell">
-                                    Start Date
+                                    Tanggal Transaksi
                                 </th>
-                                <th class="d-none d-xl-table-cell">
-                                    End Date
-                                </th>
-                                <th>Status</th>
+                                <th>Jenis</th>
                                 <th class="d-none d-md-table-cell">
-                                    Assignee
+                                    Jumlah
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Project Apollo</td>
-                                <td class="d-none d-xl-table-cell">
-                                    01/01/2023
-                                </td>
-                                <td class="d-none d-xl-table-cell">
-                                    31/06/2023
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">Done</span>
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    Vanessa Tucker
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Project Fireball</td>
-                                <td class="d-none d-xl-table-cell">
-                                    01/01/2023
-                                </td>
-                                <td class="d-none d-xl-table-cell">
-                                    31/06/2023
-                                </td>
-                                <td>
-                                    <span class="badge bg-danger">Cancelled</span>
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    William Harris
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Project Hades</td>
-                                <td class="d-none d-xl-table-cell">
-                                    01/01/2023
-                                </td>
-                                <td class="d-none d-xl-table-cell">
-                                    31/06/2023
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">Done</span>
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    Sharon Lessman
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Project Nitro</td>
-                                <td class="d-none d-xl-table-cell">
-                                    01/01/2023
-                                </td>
-                                <td class="d-none d-xl-table-cell">
-                                    31/06/2023
-                                </td>
-                                <td>
-                                    <span class="badge bg-warning">In progress</span>
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    Vanessa Tucker
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Project Phoenix</td>
-                                <td class="d-none d-xl-table-cell">
-                                    01/01/2023
-                                </td>
-                                <td class="d-none d-xl-table-cell">
-                                    31/06/2023
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">Done</span>
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    William Harris
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Project X</td>
-                                <td class="d-none d-xl-table-cell">
-                                    01/01/2023
-                                </td>
-                                <td class="d-none d-xl-table-cell">
-                                    31/06/2023
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">Done</span>
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    Sharon Lessman
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Project Romeo</td>
-                                <td class="d-none d-xl-table-cell">
-                                    01/01/2023
-                                </td>
-                                <td class="d-none d-xl-table-cell">
-                                    31/06/2023
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">Done</span>
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    Christina Mason
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Project Wombat</td>
-                                <td class="d-none d-xl-table-cell">
-                                    01/01/2023
-                                </td>
-                                <td class="d-none d-xl-table-cell">
-                                    31/06/2023
-                                </td>
-                                <td>
-                                    <span class="badge bg-warning">In progress</span>
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    William Harris
-                                </td>
-                            </tr>
+                            @forelse ($kas as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="d-none d-xl-table-cell">
+                                        {{ $item->keterangan }}
+                                    </td>
+                                    <td class="d-none d-xl-table-cell">
+                                        {{ $item->tanggal->format('d-m-Y') }}
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                        {{ $item->jenis }}
+                                        </span>
+                                    </td>
+                                    <td class="d-none d-md-table-cell">
+                                        {{ formatRupiah($item->jumlah) }}
+                                        
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">Data tidak ada</td>
+                                </tr>
+                            @endforelse
+
                         </tbody>
                     </table>
                 </div>

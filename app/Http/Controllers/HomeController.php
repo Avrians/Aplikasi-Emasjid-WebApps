@@ -26,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $data['saldoAkhir'] = Kas::saldoAkhir();
-        $data['totalInfaq'] = Infaq::whereDate('created_at', now()->format('Y-m-d'))->sum('jumlah');
+        $data['totalInfaq'] = Infaq::userMasjid()->whereDate('created_at', now()->format('Y-m-d'))->sum('jumlah');
+        $data['kas'] = Kas::userMasjid()->latest()->take(7)->get();
         $data['title'] ='Beranda';
         return view('home',$data);
     }
