@@ -8,6 +8,7 @@ use App\Models\Infaq;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreInfaqRequest;
 use App\Http\Requests\UpdateInfaqRequest;
+use PhpParser\Node\Stmt\TryCatch;
 
 class InfaqController extends Controller
 {
@@ -62,25 +63,39 @@ class InfaqController extends Controller
     public function store(StoreInfaqRequest $request)
     {
         $requestData = $request->validated();
-        DB::beginTransaction();
-        $requestData['atas_nama'] = $requestData['atas_nama'] ?? 'Hamba Allah';
-        $infaq = Infaq::create($requestData);
 
-        // jika kas berjenis uang maka akan disimpan ke dalam kas masjid
-        if ($infaq->jenis == 'uang') {
-            $kas = new Kas();
-            $kas->infaq_id = $infaq->id;
-            $kas->masjid_id = $infaq->masjid_id;
-            $kas->tanggal = $infaq->created_at;
-            $kas->kategori = 'infaq-' . $infaq->sumber;
-            $kas->keterangan = 'Infaq ' . $infaq->sumber . ' dari ' . $infaq->atas_nama;
-            $kas->jenis = 'masuk';
-            $kas->jumlah = $infaq->jumlah;
-            $kas->save();
+        // Cara ketiga
+        try {
+            // Cara yang pertama tanpa try cacth
+            DB::beginTransaction(); // jika data ada yang eror maka data ke2 nya tidak akan disimpan jika tidak memakasi ini jika ada yang gagal data masih disimpan disalah satu
+            $requestData['atas_nama'] = $requestData['atas_nama'] ?? 'Hamba Allah';
+            $infaq = Infaq::create($requestData);
+
+            // jika kas berjenis uang maka akan disimpan ke dalam kas masjid
+            if ($infaq->jenis == 'uang') {
+                $kas = new Kas();
+                $kas->infaq_id = $infaq->id;
+                $kas->masjid_id = $infaq->masjid_id;
+                $kas->tanggal = $infaq->created_at;
+                $kas->kategori = 'infaq-' . $infaq->sumber;
+                $kas->keterangan = 'Infaq ' . $infaq->sumber . ' dari ' . $infaq->atas_nama;
+                $kas->jenis = 'masuk';
+                $kas->jumlah = $infaq->jumlah;
+                $kas->save();
+            }
+            DB::commit(); // jika data sudah benar semua mka baru di simpan
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            flash('Data infaq gagal disimpan')->error();
+            return back();
         }
 
+        // Cara yang ke2
+        // DB::transaction(function () {
+        //     isi nya
+        // });
 
-        DB::commit();
 
         flash('Data infaq berhasil ditambahkan dan tersimpan di kas masjid.')->success();
         return back();
