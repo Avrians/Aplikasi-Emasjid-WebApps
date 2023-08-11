@@ -15,6 +15,12 @@
                     ]) !!}
 
                     <div class="form-group mb-3">
+                        {!! Form::label('created_at', 'Tanggal Infaq') !!}
+                        {!! Form::date('created_at', $query->created_at ?? now(), ['class' => 'form-control']) !!}
+                        <span class="text-danger">{{ $errors->first('created_at') }}</span>
+                    </div>
+
+                    <div class="form-group mb-3">
                         {!! Form::label('sumber', 'Sumber Infaq') !!}
                         {!! Form::select('sumber', $listSumberDana, null, ['class' => 'form-control']) !!}
                         <span class="text-danger">{{ $errors->first('sumber') }}</span>
