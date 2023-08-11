@@ -1,5 +1,11 @@
 @extends('layouts.main_admin')
 
+@section('js')
+    <script src="{{ $chart->cdn() }}"></script>
+
+    {{ $chart->script() }}
+@endsection
+
 @section('content')
     <div class="container-fluid p-0">
         <h1 class="h3 mb-3">
@@ -74,15 +80,8 @@
 
             <div class="col-xl-6 col-xxl-7">
                 <div class="card flex-fill w-100">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">
-                            Grafik infaq bulanan
-                        </h5>
-                    </div>
-                    <div class="card-body py-3">
-                        <div class="chart chart-sm">
-                            <canvas id="chartjs-dashboard-line"></canvas>
-                        </div>
+                    <div class="card-body py-3a">
+                        {!! $chart->container() !!}
                     </div>
                 </div>
             </div>
@@ -122,12 +121,12 @@
                                     </td>
                                     <td>
                                         <span class="badge bg-success">
-                                        {{ $item->jenis }}
+                                            {{ $item->jenis }}
                                         </span>
                                     </td>
                                     <td class="d-none d-md-table-cell">
                                         {{ formatRupiah($item->jumlah) }}
-                                        
+
                                     </td>
                                 </tr>
                             @empty
