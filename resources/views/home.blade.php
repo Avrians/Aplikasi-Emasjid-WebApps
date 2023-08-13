@@ -1,8 +1,58 @@
 @extends('layouts.main_admin')
+@section('css')
+    {{-- Menggunakan ApexChart - CSS--}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.41.1/apexcharts.min.css"
+        integrity="sha512-nnNXPeQKvNOEUd+TrFbofWwHT0ezcZiFU5E/Lv2+JlZCQwQ/ACM33FxPoQ6ZEFNnERrTho8lF0MCEH9DBZ/wWw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endsection
 
 @section('js')
-    <script src="{{ $chart->cdn() }}"></script>
+    {{-- Menggunakan ApexChart --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.41.1/apexcharts.min.js"
+        integrity="sha512-Gpg0M5UOTFSHGglemXUOUzL1LyO8MT0fxmEAjGN8jNlY6oSOsLerF1/vuXrqJXKyV5QIay12trwDDhmRJHZisA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    {{-- Data Graphic nya --}}
+    <script>
+        var options = {
+            series: [{
+                name: "Total Infaq",
+                data: @json($dataTotalInfaq)
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            title: {
+                text: 'Data Total Infaq Perbulan',
+                align: 'left'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+            xaxis: {
+                categories:  @json($dataBulan),
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+
+    {{-- Menggunakan Larapex --}}
+    <script src="{{ $chart->cdn() }}"></script>
     {{ $chart->script() }}
 @endsection
 
@@ -81,7 +131,11 @@
             <div class="col-xl-6 col-xxl-7">
                 <div class="card flex-fill w-100">
                     <div class="card-body py-3a">
-                        {!! $chart->container() !!}
+                        {{-- Menggunakan ApexChart --}}
+                        <div id="chart"></div>
+
+                        {{-- Menggunakan Larapex  --}}
+                        {{-- {!! $chart->container() !!} --}}
                     </div>
                 </div>
             </div>
