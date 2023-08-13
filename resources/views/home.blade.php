@@ -1,16 +1,12 @@
 @extends('layouts.main_admin')
 @section('css')
-    {{-- Menggunakan ApexChart - CSS--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.41.1/apexcharts.min.css"
-        integrity="sha512-nnNXPeQKvNOEUd+TrFbofWwHT0ezcZiFU5E/Lv2+JlZCQwQ/ACM33FxPoQ6ZEFNnERrTho8lF0MCEH9DBZ/wWw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- Menggunakan ApexChart - CSS --}}
+    <link rel="stylesheet" href="{{ asset('apexcharts/dist/apexcharts.min.css') }}">
 @endsection
 
 @section('js')
     {{-- Menggunakan ApexChart --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.41.1/apexcharts.min.js"
-        integrity="sha512-Gpg0M5UOTFSHGglemXUOUzL1LyO8MT0fxmEAjGN8jNlY6oSOsLerF1/vuXrqJXKyV5QIay12trwDDhmRJHZisA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('apexcharts/dist/apexcharts.min.js') }}"></script>
 
     {{-- Data Graphic nya --}}
     <script>
@@ -20,7 +16,7 @@
                 data: @json($dataTotalInfaq)
             }],
             chart: {
-                height: 350,
+                height: 280,
                 type: 'line',
                 zoom: {
                     enabled: false
@@ -43,8 +39,18 @@
                 },
             },
             xaxis: {
-                categories:  @json($dataBulan),
-            }
+                categories: @json($dataBulan),
+            },
+            yaxis: {
+                labels: {
+                    formatter: function(value) {
+                        return value.toLocaleString("id-ID", {
+                            style: "currency",
+                            currency: "IDR"
+                        });
+                    }
+                },
+            },
         };
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
