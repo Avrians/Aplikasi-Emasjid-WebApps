@@ -37,20 +37,20 @@
                         Menu Utama
                     </li>
 
-                    <li class="sidebar-item {{ Route::is('home') ? 'active' : '' }}">
+                    <li class="sidebar-item @activeMenu('home')">
                         <a class="sidebar-link" href="{{ route('home') }}">
                             <i class="align-middle" data-feather="sliders"></i> <span
                                 class="align-middle">Beranda</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ Route::is('masjid.*') ? 'active' : '' }}">
+                    <li class="sidebar-item @activeMenu('masjid.*')">
                         <a class="sidebar-link" href="{{ route('masjid.create') }}">
                             <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data
                                 Masjid</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ Route::is('infaq.*') ? 'active' : '' }}">
+                    <li class="sidebar-item @activeMenu('infaq.*')">
                         <a class="sidebar-link" href="{{ route('infaq.index') }}">
                             <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Infaq</span>
                         </a>
@@ -79,7 +79,7 @@
                                 Masjid</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ Route::is('masjidbank.*') ? 'active' : '' }}">
+                    <li class="sidebar-item  {{ Route::is('masjidbank.*') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('masjidbank.index') }}">
                             <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Bank</span>
                         </a>
