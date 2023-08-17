@@ -35,7 +35,7 @@ Route::get('logout-user', function () {
 })->name('logout-user');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcomeoffcanvas');
 });
 
 Auth::routes();

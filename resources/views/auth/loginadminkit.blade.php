@@ -15,7 +15,7 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-in.html" />
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'E-Masjid') }}</title>
 
 
     <link href="adminkit/css/app.css" rel="stylesheet">
