@@ -39,6 +39,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="m-sm-3">
+                                    <div class="text-center">
+                                        <img src="images/logobulan.png" alt="Logo" width="132" height="132">
+                                    </div>
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="mb-3">
@@ -66,6 +69,10 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+
+                                            <small>
+                                                <a href="{{ route('password.request') }}">Lupa Password?</a>
+                                            </small>
                                         </div>
                                         <div>
                                             <div class="form-check align-items-center">
@@ -84,7 +91,7 @@
                             </div>
                         </div>
                         <div class="text-center mb-3">
-                            Don't have an account? <a href="pages-sign-up.html">Sign up</a>
+                            Don't have an account? <a href="/register">Sign up</a>
                         </div>
                     </div>
                 </div>
