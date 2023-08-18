@@ -14,6 +14,7 @@ use App\Http\Controllers\MasjidController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Middleware\EnsureDataMasjidCompleted;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -34,9 +35,11 @@ Route::get('logout-user', function () {
     return redirect('/');
 })->name('logout-user');
 
-Route::get('/', function () {
-    return view('welcomeoffcanvas');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Auth::routes();
 
