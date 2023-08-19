@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -195,12 +195,14 @@
         </div>
     </nav>
 
-    @yield('content')
+    <main class="container">
+        @yield('content')
+    </main>
 
-    
-    <script src="offcanvas/bootstrap.bundle.min.js"></script>
 
-    <script src="offcanvas/offcanvas-navbar.js"></script>
+    <script src="{{ asset('offcanvas/bootstrap.bundle.min.js') }}"></script>
+
+    <script src="{{ asset('offcanvas/offcanvas-navbar.js') }}"></script>
 </body>
 
 </html>

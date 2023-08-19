@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataMasjidController;
 use App\Http\Controllers\InfaqController;
 use App\Http\Controllers\InformasiController;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,7 @@ Route::get('logout-user', function () {
 // });
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('data-masjid/{slug}', [DataMasjidController::class, 'show'])->name('data-masjid.show');
 
 Auth::routes();
 
