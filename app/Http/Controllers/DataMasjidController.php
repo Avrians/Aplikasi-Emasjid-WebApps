@@ -9,7 +9,14 @@ class DataMasjidController extends Controller
 {
     public function show($slug)
     {
-        $data['masjid'] = Masjid::where('id', $slug)->firstOrFail();
+        $data['masjid'] = Masjid::where('id', $slug)->first();
+        if ($data['masjid'] == null) {
+            flash('Data Masjid Tidak Ditemukan')->error();
+            return redirect('/');
+        }
+
+        $data['kas'] = $data['masjid']->kas()->orderBy('tanggal', 'desc')->get(); // mengambil data kas
+
         return view('welcome.datamasjid', $data);
     }
 

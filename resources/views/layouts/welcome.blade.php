@@ -229,9 +229,9 @@
     </nav>
 
     <main class="container">
+        @include('flash::message')
         @yield('content')
     </main>
-
 
     <script src="{{ asset('offcanvas/js/bootstrap.bundle.min.js') }}"></script>
 

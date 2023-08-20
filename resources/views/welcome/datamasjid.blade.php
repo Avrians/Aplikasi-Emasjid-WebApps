@@ -13,22 +13,39 @@
         <div class="my-3 p-3 bg-body rounded shadow-sm">
             <h6 class="border-bottom pb-2 mb-0">Informasi Kas Masjid</h6>
 
-            {{-- @foreach ($masjid as $item) --}}
-                <div class="d-flex text-body-secondary pt-3">
-                    <img class="me-3" src="/images/masjid.png" alt="" width="32" height="32">
-                    <p class="pb-3 mb-0 small lh-sm border-bottom">
-                        {{-- <a href="{{ route('data-masjid.show', $item->id) }}" class="link"> --}}
-                            <strong class="d-block text-gray-dark">aaaa</strong>
-                        {{-- </a>
-                        {{ $item->alamat }} --}}
-                    </p>
-                </div>
-            {{-- @endforeach --}}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th width="1%">No</th>
+                        <th>Tanggal</th>
+                        <th>Keterangan</th>
+                        <th>Jenis</th>
+                        <th class="text-end">Jumlah</th>
+                    </tr>
+                </thead>
+                <tbody>
 
+                    @forelse ($kas as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->tanggal->translatedFormat('d F Y') }}</td>
+                            <td>{{ $item->keterangan }}</td>
+                            <td>
+                                @if ($item->jenis == 'masuk')
+                                    <span class="badge bg-success">Masuk</span>
+                                @else
+                                    <span class="badge bg-warning">Keluar</span>
+                                @endif
+                            </td>
+                            <td class="text-end">{{ formatRupiah($item->jumlah, true) }}</td>
 
-            <small class="d-block text-end mt-3">
-                <a href="{{ route('login') }}">Login Pengurus</a>
-            </small>
+                        </tr>
+                    @empty
+                    @endforelse
+
+                </tbody>
+            </table>
+            <h4>Saldo Akhir: {{ formatRupiah($masjid->saldo_akhir, true) }} </h4>
         </div>
 
     </main>
