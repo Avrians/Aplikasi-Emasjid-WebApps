@@ -181,9 +181,29 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Dashboard</a>
                     </li>
                     @isset($masjid)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Profil</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                aria-expanded="false">Profil</a>
+                            <ul class="dropdown-menu">
+                                @foreach ($masjid->profils as $itemProfil)
+                                    <li><a class="dropdown-item" href="#">{{ $itemProfil->judul }}</a></li>
+                                @endforeach
+                            </ul>
                         </li>
+
+                        @foreach ($masjid->kategori as $itemKategori)
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                    aria-expanded="false">{{ $itemKategori->nama }}</a>
+                                <ul class="dropdown-menu">
+                                    @forelse ($itemKategori->informasi as $itemInfo)
+                                        <li><a class="dropdown-item" href="#">{{ $itemInfo->judul }}</a></li>
+                                    @empty
+                                        <li><a class="dropdown-item" href="#">Data tidak ada</a></li>
+                                    @endforelse
+                                </ul>
+                            </li>
+                        @endforeach
                     @endisset
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}">Pendaftaran</a>
