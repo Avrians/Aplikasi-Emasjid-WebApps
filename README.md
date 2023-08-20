@@ -8,34 +8,34 @@ Website aplikasi e-masjid yang dilengkapi dengan fitur mengelola kas, infaq, kur
 
 <h3>Halaman Dashboard Pengurus</h3>
 
-![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/master/hasil_output/dashboard.png?raw=true)
+![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/main/hasil_output/dashboard.png?raw=true)
 
 <h3>Halaman Kas Masjid</h3>
 
-![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/master/hasil_output/kas.png?raw=true)
+![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/main/hasil_output/kas.png?raw=true)
 
 <h3>Halaman Infaq Masjid</h3>
 
-![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/master/hasil_output/infaq.png?raw=true)
+![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/main/hasil_output/infaq.png?raw=true)
 
 <h3>Halaman Informasi Masjid</h3>
 
-![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/master/hasil_output/informasi.png?raw=true)
+![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/main/hasil_output/informasi.png?raw=true)
 
 <h3>Halaman Informasi dan Detail Kurban</h3>
 
-![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/master/hasil_output/kurban.png?raw=true)
+![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/main/hasil_output/kurban.png?raw=true)
 
-![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/master/hasil_output/kurbandetail.png?raw=true)
+![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/main/hasil_output/kurbandetail.png?raw=true)
 
 <h3>Halaman Home Page E-Masjid</h3>
 
-![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/master/hasil_output/homepage.png?raw=true)
+![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/main/hasil_output/homepage.png?raw=true)
 
 <h3>Halaman Login dan Register E-Masjid</h3>
 
-![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/master/hasil_output/daftar.png?raw=true)
+![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/main/hasil_output/daftar.png?raw=true)
 
-![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/master/hasil_output/login.png?raw=true)
+![alt text](https://github.com/Avrians/Aplikasi-Emasjid-WebApps/blob/main/hasil_output/login.png?raw=true)
 
 <small>Note : Database tidak disertakan jika ingin mencoba aplikasi silahkan hubungi sosmed yang ada pada profile github</small>
