@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="auto">
 
 <head>
-    <script src="../assets/js/color-modes.js"></script>
+    <script src="{{ asset('offcanvas/js/color-modes.js') }}"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -94,7 +94,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="offcanvas/offcanvas-navbar.css" rel="stylesheet">
+    <link href="{{ asset('offcanvas/offcanvas-navbar.css') }}" rel="stylesheet">
 </head>
 
 <body class="bg-body-tertiary">
@@ -169,7 +169,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">E-Masjid</a>
+            <a class="navbar-brand" href="/">E-Masjid</a>
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -180,6 +180,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Dashboard</a>
                     </li>
+                    @isset($masjid)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Profil</a>
+                        </li>
+                    @endisset
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}">Pendaftaran</a>
                     </li>
@@ -200,9 +205,9 @@
     </main>
 
 
-    <script src="{{ asset('offcanvas/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('offcanvas/js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="{{ asset('offcanvas/offcanvas-navbar.js') }}"></script>
+    <script src="{{ asset('offcanvas/js/offcanvas-navbar.js') }}"></script>
 </body>
 
 </html>

@@ -13,7 +13,7 @@
         <div class="my-3 p-3 bg-body rounded shadow-sm">
             <h6 class="border-bottom pb-2 mb-0">Masjid Terdaftar</h6>
 
-            @foreach ($masjid as $item)
+            @foreach ($masjids as $item)
                 <div class="d-flex text-body-secondary pt-3">
                     <img class="me-3" src="/images/masjid.png" alt="" width="32" height="32">
                     <p class="pb-3 mb-0 small lh-sm border-bottom">

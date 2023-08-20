@@ -5,13 +5,13 @@
         <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
             <img class="me-3" src="/images/logobulan.png" alt="" width="48" height="38">
             <div class="lh-1">
-                <h1 class="h6 mb-0 text-white lh-1">E-Masjid</h1>
-                <small>Aplikasi Administrasi Keungan Masjid</small>
+                <h1 class="h6 mb-0 text-white lh-1">{{ strtoupper($masjid->nama) }}</h1>
+                <small>{{ $masjid->alamat }}</small>
             </div>
         </div>
 
         <div class="my-3 p-3 bg-body rounded shadow-sm">
-            <h6 class="border-bottom pb-2 mb-0">Masjid Terdaftar</h6>
+            <h6 class="border-bottom pb-2 mb-0">Informasi Kas Masjid</h6>
 
             {{-- @foreach ($masjid as $item) --}}
                 <div class="d-flex text-body-secondary pt-3">
