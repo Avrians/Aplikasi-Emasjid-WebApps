@@ -28,7 +28,7 @@ class InformasiController extends Controller
         $data['model'] = new Informasi();
         $data['route'] = 'informasi.store';
         $data['method'] = 'POST';
-        $data['listKategori'] = Kategori::pluck('nama', 'id');
+        $data['listKategori'] = Kategori::UserMasjid()->pluck('nama', 'id');
         $data['title'] = 'Tambah Informasi Baru';
         return view('informasi.form', $data);
     }

@@ -181,15 +181,21 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Dashboard</a>
                     </li>
                     @isset($masjid)
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
-                                aria-expanded="false">Profil</a>
-                            <ul class="dropdown-menu">
-                                @foreach ($masjid->profils as $itemProfil)
-                                    <li><a class="dropdown-item" href="#">{{ $itemProfil->judul }}</a></li>
-                                @endforeach
-                            </ul>
-                        </li>
+                        @if ($masjid->profils->count() > 0)
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                    aria-expanded="false">Profil</a>
+                                <ul class="dropdown-menu">
+                                    @forelse ($masjid->profils as $itemProfil)
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('data-masjid.profil', [$masjid->id, $itemProfil->slug]) }}">{{ $itemProfil->judul }}</a>
+                                        </li>
+                                    @empty
+                                        <li><a class="dropdown-item" href="#">Data tidak ada</a></li>
+                                    @endforelse
+                                </ul>
+                            </li>
+                        @endif
 
                         @foreach ($masjid->kategori as $itemKategori)
                             <li class="nav-item dropdown">
@@ -197,7 +203,9 @@
                                     aria-expanded="false">{{ $itemKategori->nama }}</a>
                                 <ul class="dropdown-menu">
                                     @forelse ($itemKategori->informasi as $itemInfo)
-                                        <li><a class="dropdown-item" href="#">{{ $itemInfo->judul }}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('data-masjid.informasi', [$itemKategori->id, $itemInfo->slug]) }}">{{ $itemInfo->judul }}</a>
+                                        </li>
                                     @empty
                                         <li><a class="dropdown-item" href="#">Data tidak ada</a></li>
                                     @endforelse

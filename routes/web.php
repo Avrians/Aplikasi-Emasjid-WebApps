@@ -42,6 +42,8 @@ Route::get('logout-user', function () {
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('data-masjid/{slug}', [DataMasjidController::class, 'show'])->name('data-masjid.show');
+Route::get('data-masjid/{slugMasjid}/profil/{slugProfil}', [DataMasjidController::class, 'profil'])->name('data-masjid.profil');
+Route::get('data-masjid/{slugMasjid}/informasi/{slugInformasi}', [DataMasjidController::class, 'informasi'])->name('data-masjid.informasi');
 
 Auth::routes();
 

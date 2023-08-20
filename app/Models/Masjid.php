@@ -38,4 +38,9 @@ class Masjid extends Model
     {
         return $this->hasMany(Kategori::class);
     }
+
+    public function informasi(): HasMany
+    {
+        return $this->hasMany(Informasi::class);
+    }
 }
